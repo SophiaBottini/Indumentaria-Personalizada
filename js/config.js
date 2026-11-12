@@ -3,13 +3,13 @@
    el sitio (encabezado, pie, botones de WhatsApp/email y formulario).
    ========================================================================= */
 export const CONFIG = {
-  marca: 'Indumentaria Personalizada',
-  marcaCorta: 'IP',
+  marca: 'Taller Pacino',
+  marcaCorta: 'TP',
   linea: 'SPORT',
   // WhatsApp en formato internacional, sin + ni espacios. Ej: 5491122334455
   whatsapp: '5490000000000',
-  email: 'ventas@tuempresa.com',
-  instagram: 'tuempresa',
+  email: 'ventas@tallerpacino.com',
+  instagram: 'tallerpacino',
   ciudad: 'Argentina',
   // (Opcional) Endpoint para recibir solicitudes por email sin backend propio,
   // p. ej. Formspree: 'https://formspree.io/f/xxxxxxx'. Vacío = desactivado.

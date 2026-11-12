@@ -1,6 +1,8 @@
-# Indumentaria Personalizada — Sitio web + Personalizador 3D
+# Taller Pacino Sport — Sitio web + Personalizador 3D
 
-Sitio web para empresa de ropa personalizada (empresas, colegios y clubes deportivos), con prendas en 3D y un personalizador interactivo para que el cliente arme su diseño y envíe una **solicitud de presupuesto**.
+Sitio de la línea deportiva de **Taller Pacino**, pensado para clubes de fútbol, hockey, rugby y básquet. Muestra las prendas en 3D y tiene un personalizador interactivo para que el club arme su diseño y envíe una **solicitud de presupuesto**.
+
+Identidad visual tomada del manual de marca: beige, verde oliva, topo y negro, con tipografía Montserrat. El logo y las fotos están en `assets/img/`. El diseño de referencia está en Figma: https://www.figma.com/design/VnWh0CmbdvvPLToM3jd3um
 
 ## Qué incluye
 

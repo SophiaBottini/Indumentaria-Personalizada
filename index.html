@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Indumentaria Personalizada | Ropa deportiva y corporativa a medida</title>
-  <meta name="description" content="Indumentaria personalizada para empresas, colegios y clubes deportivos. Diseñá tu prenda en 3D y pedí tu presupuesto.">
-  <meta name="theme-color" content="#0a0c10">
+  <title>Taller Pacino Sport | Indumentaria para clubes de fútbol, hockey, rugby y básquet</title>
+  <meta name="description" content="Taller Pacino diseña y confecciona indumentaria deportiva para clubes de fútbol, hockey, rugby y básquet. Diseñá tu camiseta en 3D y pedí tu presupuesto.">
+  <meta name="theme-color" content="#e6dfd3">
+  <link rel="icon" href="assets/img/logo-tp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Bebas+Neue&family=Graduate&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Archivo+Black&family=Bebas+Neue&family=Graduate&family=Playfair+Display:wght@800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script type="importmap">
     { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
@@ -17,277 +18,181 @@
 <body>
 
 <header class="site-header" id="top">
-  <div class="container nav">
-    <a href="index.html" class="brand" aria-label="Inicio">
-      <span class="brand-mark" data-cfg="marcaCorta">IP</span>
-      <span class="brand-text"><strong data-cfg="marca">Indumentaria Personalizada</strong><span data-cfg="linea">SPORT</span></span>
+  <div class="wrap nav">
+    <a href="index.html" class="logo" aria-label="Taller Pacino — inicio">
+      <img class="tp" src="assets/img/logo-tp.png" alt="">
+      <img class="word" src="assets/img/logo-word-dark.png" alt="Taller Pacino">
+      <span class="sep"></span><span class="line">SPORT</span>
     </a>
     <nav class="nav-links" aria-label="Principal">
-      <a href="#sectores">Sectores</a>
-      <a href="#productos">Productos</a>
-      <a href="#disenos">Diseños</a>
-      <a href="#proceso">Cómo trabajamos</a>
-      <a href="#faq">Preguntas</a>
+      <a href="#deportes">Deportes</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#personalizador">Personalizador</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#proceso">Proceso</a>
     </nav>
-    <div class="nav-cta">
-      <a class="btn btn-ghost btn-sm" data-cfg="whatsapp-link" target="_blank" rel="noopener">Contacto</a>
-      <a class="btn btn-primary btn-sm" href="personalizar.html">Diseñá tu prenda</a>
-    </div>
+    <a class="btn btn-dark btn-sm" href="personalizar.html">Pedí tu presupuesto</a>
   </div>
 </header>
 
 <main>
   <!-- HERO -->
   <section class="hero">
-    <div class="container hero-grid">
-      <div class="reveal">
-        <span class="tag"><span class="dot"></span> Nueva línea deportiva</span>
-        <h1 class="h-display">Vestí a tu <span class="hl">equipo</span> con <span class="stroke">identidad</span> propia</h1>
-        <p class="lead">Indumentaria personalizada para empresas, colegios y clubes deportivos. Diseñá tu prenda en 3D, probá colores y escudos, y envianos tu idea: te armamos un presupuesto a medida.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="personalizar.html">
-            Empezar a diseñar
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-          </a>
-          <a class="btn btn-ghost" href="#productos">Ver productos</a>
-        </div>
-        <div class="hero-stats">
-          <div><strong>Diseño 3D</strong><span>Mirá tu prenda en 360°</span></div>
-          <div><strong>Sublimación total</strong><span>Bordado y estampado</span></div>
-          <div><strong>Presupuesto a medida</strong><span>Según cantidades y técnica</span></div>
-        </div>
+    <div class="hero-text">
+      <span class="eyebrow">Nueva línea deportiva</span>
+      <h1>Vestí a <em>tu club.</em></h1>
+      <p class="lead">Diseñamos y confeccionamos indumentaria para clubes de fútbol, hockey, rugby y básquet. Armá tu camiseta en 3D, probá colores y escudos, y pedí tu presupuesto a medida.</p>
+      <div class="actions">
+        <a class="btn btn-dark" href="personalizar.html">Diseñá tu camiseta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+        <a class="btn btn-outline" href="#deportes">Ver deportes</a>
       </div>
-
-      <div class="stage reveal">
-        <div class="stage-ring"></div>
-        <div class="stage-canvas" id="heroStage" aria-label="Prenda en 3D. Arrastrá para girarla."></div>
-        <div class="stage-hint">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 3v6h-6"/></svg>
-          Arrastrá para girar
-        </div>
-        <div class="float-card fc1"><strong>Nombre + número</strong><span>Personalizado por jugador</span></div>
-        <div class="float-card fc2"><strong>Tu escudo</strong><span>Subí tu logo y miralo aplicado</span></div>
-        <div class="stage-ui">
-          <div class="chip-row" id="heroChips" role="tablist" aria-label="Prenda"></div>
-          <div class="swatch-row" id="heroSwatches" aria-label="Combinaciones de color"></div>
-        </div>
-      </div>
+      <hr class="rule">
+      <div class="sports-row" aria-label="Deportes"><span>FÚTBOL</span><i></i><span>HOCKEY</span><i></i><span>RUGBY</span><i></i><span>BÁSQUET</span></div>
+    </div>
+    <div class="hero-stage">
+      <div class="bg-num" id="heroNum" aria-hidden="true">10</div>
+      <div class="stage-top"><span>Taller Pacino · Sport</span><span>Arrastrá para girar 360°</span></div>
+      <div class="hero-canvas" id="heroStage" aria-label="Camiseta en 3D. Arrastrá para girarla."></div>
+      <div class="sport-tabs" id="sportTabs" role="tablist" aria-label="Elegí un deporte"></div>
     </div>
   </section>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee-track">
-      <span>Camisetas</span><span>Shorts</span><span>Buzos</span><span>Chombas</span><span>Musculosas</span><span>Camperas</span><span>Uniformes</span><span>Egresados</span>
-      <span>Camisetas</span><span>Shorts</span><span>Buzos</span><span>Chombas</span><span>Musculosas</span><span>Camperas</span><span>Uniformes</span><span>Egresados</span>
+  <div class="band" aria-hidden="true">
+    <div class="band-track">
+      <span>Fútbol</span><span>Hockey</span><span>Rugby</span><span>Básquet</span><span>Sublimación total</span><span>Bordado</span><span>Confección propia</span>
+      <span>Fútbol</span><span>Hockey</span><span>Rugby</span><span>Básquet</span><span>Sublimación total</span><span>Bordado</span><span>Confección propia</span>
     </div>
   </div>
 
-  <!-- SECTORES -->
-  <section class="section" id="sectores">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">¿Para quién?</span>
-          <h2 class="h-display">Una solución para cada equipo</h2>
-        </div>
-        <p>Trabajamos con instituciones que necesitan imagen, calidad y cumplimiento de plazos. Elegí tu sector y arrancá con un diseño base pensado para vos.</p>
+  <!-- DEPORTES -->
+  <section class="section alt" id="deportes">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="index">01.</span><h2 class="title">Un equipo para <em>cada deporte.</em></h2></div>
+        <p class="lead">Prendas pensadas para el uso intensivo de cada disciplina: telas técnicas, cortes cómodos y terminaciones que resisten temporada tras temporada.</p>
       </div>
-      <div class="sectors">
-        <a class="sector reveal" href="personalizar.html?sector=empresa" style="--glow: rgba(168,218,220,.22)">
-          <span class="num">01</span>
-          <div class="sector-img" data-thumb="corporativa"></div>
-          <h3>Empresas</h3>
-          <p>Uniformes corporativos, ropa de trabajo y equipos para eventos con la identidad de tu marca.</p>
-          <ul><li>Chombas bordadas</li><li>Remeras de evento</li><li>Camperas</li></ul>
-          <span class="link">Diseñar para empresas</span>
-        </a>
-        <a class="sector reveal" href="personalizar.html?sector=colegio" style="--glow: rgba(239,35,60,.22)">
-          <span class="num">02</span>
-          <div class="sector-img" data-thumb="egresados"></div>
-          <h3>Colegios</h3>
-          <p>Buzos y camperas de egresados, uniformes de educación física y equipos intercolegiales.</p>
-          <ul><li>Egresados</li><li>Educación física</li><li>Intercolegiales</li></ul>
-          <span class="link">Diseñar para colegios</span>
-        </a>
-        <a class="sector reveal" href="personalizar.html?sector=club" style="--glow: rgba(242,194,48,.22)">
-          <span class="num">03</span>
-          <div class="sector-img" data-thumb="clasica"></div>
-          <h3>Clubes</h3>
-          <p>Camisetas de juego, entrenamiento y viaje. Sublimación total con nombre y número por jugador.</p>
-          <ul><li>Fútbol</li><li>Hockey</li><li>Básquet</li><li>Vóley</li><li>Rugby</li></ul>
-          <span class="link">Diseñar para clubes</span>
-        </a>
+      <div class="sports" id="sportsGrid"></div>
+    </div>
+  </section>
+
+  <!-- NOSOTROS -->
+  <section class="about" id="nosotros">
+    <div class="about-text reveal">
+      <div><span class="index">02.</span><h2 class="title">Quiénes <em>somos.</em></h2></div>
+      <p class="big">Somos una empresa familiar textil con experiencia en indumentaria laboral, y ahora llevamos ese oficio al deporte.</p>
+      <p class="lead">Combinamos experiencia, compromiso y atención al detalle para crear prendas funcionales, cómodas y adaptadas a las necesidades de cada club.</p>
+      <hr class="rule">
+      <div class="values">
+        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div><span>Empresa<br>familiar</span></div>
+        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg></div><span>Experiencia<br>textil</span></div>
+        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>Compromiso<br>en cada prenda</span></div>
+        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5"/></svg></div><span>Atención<br>al detalle</span></div>
+      </div>
+    </div>
+    <div class="about-photo" style="background-image:url('assets/img/taller.jpg')" role="img" aria-label="Prendas confeccionadas en el taller con la etiqueta Taller Pacino"></div>
+  </section>
+
+  <!-- PERSONALIZADOR -->
+  <section class="section dark" id="personalizador">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="index">03.</span><h2 class="title">Personalizador <em>3D.</em></h2></div>
+        <p class="lead">Probalo acá mismo: elegí la prenda, el diseño y los colores. En el personalizador completo subís el escudo, cargás nombres, números y talles, y nos llega todo listo para cotizar.</p>
+      </div>
+      <div class="demo reveal">
+        <div class="demo-opts">
+          <div class="demo-steps"><span class="on">Prenda</span><span class="on">Diseño</span><span class="on cur">Color</span><span>Texto</span><span>Escudo</span></div>
+          <h4>Armá tu camiseta</h4>
+          <div><div class="demo-label">Prenda</div><div class="chips" id="demoProducts"></div></div>
+          <div><div class="demo-label">Diseño</div><div class="chips" id="demoPatterns"></div></div>
+          <div><div class="demo-label">Colores del club</div><div class="pal-list" id="demoPalettes"></div></div>
+        </div>
+        <div class="demo-view">
+          <div class="demo-canvas" id="demoStage" aria-label="Vista 3D del diseño"></div>
+          <div class="demo-views" id="demoViews">
+            <button data-view="frente" class="active">Frente</button><button data-view="espalda">Espalda</button><button data-view="izq">Lateral</button><button data-view="rotar">360°</button>
+          </div>
+        </div>
+        <div class="demo-sum">
+          <h4>Resumen</h4>
+          <dl id="demoSpec"></dl>
+          <p class="demo-note">La vista 3D es una referencia. Antes de producir te enviamos la propuesta final para aprobar.</p>
+          <a class="btn btn-oliva btn-block" id="demoGo" href="personalizar.html">Seguir personalizando →</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PRODUCTOS -->
-  <section class="section" id="productos" style="padding-top: 20px">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Catálogo</span>
-          <h2 class="h-display">Prendas listas para personalizar</h2>
-        </div>
-        <p>Pasá el mouse para ver la espalda. Cada prenda se puede personalizar en colores, diseño, escudo, nombre y número.</p>
+  <!-- CATÁLOGO -->
+  <section class="section" id="catalogo">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div><span class="index">04.</span><h2 class="title">Prendas <em>para tu equipo.</em></h2></div>
+        <p class="lead">Todas se personalizan en colores, diseño, escudo, nombre y número, en talles de adulto y niño. Pasá el mouse para ver la espalda.</p>
       </div>
       <div class="products" id="productGrid"></div>
     </div>
   </section>
 
-  <!-- DISEÑOS -->
-  <section class="section" id="disenos" style="padding-top: 20px">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Tipos de diseño</span>
-          <h2 class="h-display">Elegí un estilo y hacelo tuyo</h2>
-        </div>
-        <p>Plantillas de base para arrancar rápido. Abrí cualquiera en el personalizador y cambiá todo: colores, prenda, textos y logo.</p>
-      </div>
-      <div class="templates" id="templateGrid"></div>
-    </div>
-  </section>
-
   <!-- PROCESO -->
-  <section class="section" id="proceso">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Cómo trabajamos</span>
-          <h2 class="h-display">De la idea a tu equipo</h2>
-        </div>
-        <p>Sin vueltas. Diseñás online, nos mandás la solicitud y nosotros nos encargamos del resto.</p>
+  <section class="section alt" id="proceso">
+    <div class="wrap">
+      <div class="sec-head reveal" style="display:block">
+        <span class="index">05.</span><h2 class="title">Nuestro <em>proceso.</em></h2>
+        <p class="sub-tracked">De la idea a tu equipo.</p>
       </div>
-      <div class="steps">
-        <div class="step reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div>
-          <h3>Diseñá online</h3>
-          <p>Elegí la prenda, el estilo, los colores y subí tu escudo. Miralo en 3D desde todos los ángulos.</p>
-        </div>
-        <div class="step reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></div>
-          <h3>Enviá tu solicitud</h3>
-          <p>Cargá cantidades por talle y tus datos. Nos llega tu diseño con todas las especificaciones.</p>
-        </div>
-        <div class="step reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div>
-          <h3>Presupuesto y ajustes</h3>
-          <p>Te enviamos un presupuesto a medida y afinamos el diseño final con vos antes de producir.</p>
-        </div>
-        <div class="step reveal">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
-          <h3>Producción y entrega</h3>
-          <p>Fabricamos tu pedido y lo entregamos listo para usar, con cada prenda personalizada.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TÉCNICAS -->
-  <section class="section" style="padding-top: 0">
-    <div class="container tech">
-      <div class="tech-card reveal">
-        <span class="eyebrow">Técnicas</span>
-        <h2 class="h-display" style="font-size: clamp(28px,3.4vw,42px); margin-top: 10px">Terminaciones de calidad</h2>
-        <div class="tech-list">
-          <div class="tech-item">
-            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.7-.8 1.7-1.7 0-.4-.2-.8-.4-1.1-.3-.3-.4-.7-.4-1.1 0-.9.8-1.7 1.7-1.7h2c3 0 5.5-2.5 5.5-5.5C22 6 17.5 2 12 2z"/></svg></div>
-            <div><h4>Sublimación total</h4><p>Diseños sin límite de colores, degradés y estampados de punta a punta que no se cuartean ni destiñen.</p></div>
-          </div>
-          <div class="tech-item">
-            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5 2 7.5L12 16.5 5.5 21l2-7.5L2 9h7z"/></svg></div>
-            <div><h4>Bordado</h4><p>Escudos y logos con relieve y terminación premium. Ideal para chombas, camperas y buzos.</p></div>
-          </div>
-          <div class="tech-item">
-            <div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-            <div><h4>Estampado y vinilo</h4><p>Nombres y números por jugador, numeración completa de planteles y estampas sobre algodón.</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="tech-card reveal">
-        <span class="eyebrow">Telas</span>
-        <h2 class="h-display" style="font-size: clamp(28px,3.4vw,42px); margin-top: 10px">La tela justa para cada uso</h2>
-        <div class="fabrics">
-          <div class="fabric"><div class="fx fx-dry"></div><strong>Dry-fit</strong><span>Liviana y respirable. Camisetas de juego y running.</span></div>
-          <div class="fabric"><div class="fx fx-mp"></div><strong>Micropanal</strong><span>Mayor ventilación. Básquet, vóley y entrenamiento.</span></div>
-          <div class="fabric"><div class="fx fx-alg"></div><strong>Algodón / Piqué</strong><span>Suave y prolijo. Chombas y uniformes corporativos.</span></div>
-          <div class="fabric"><div class="fx fx-fri"></div><strong>Frisa</strong><span>Abrigo y durabilidad. Buzos de egresados y viaje.</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section" style="padding-top: 0">
-    <div class="container">
-      <div class="cta reveal">
-        <div>
-          <span class="eyebrow">Tu equipo, tu diseño</span>
-          <h2 class="h-display" style="margin: 12px 0">¿Listo para ver tu prenda en 3D?</h2>
-          <p>Armá tu diseño en minutos y envianos la solicitud. Te respondemos con el presupuesto y una propuesta final.</p>
-        </div>
-        <div class="cta-actions">
-          <a class="btn btn-primary" href="personalizar.html">Abrir el personalizador</a>
-          <a class="btn btn-ghost" data-cfg="whatsapp-link" target="_blank" rel="noopener">Hablar por WhatsApp</a>
-        </div>
+      <div class="steps reveal">
+        <div class="step"><div class="step-top"><b>01</b><i></i></div><h3>Diseñás o charlamos</h3><p>Armás tu idea en el personalizador o nos contás qué necesita tu club.</p><img src="assets/img/proceso-1.jpg" alt="Reunión con el cliente y bocetos" loading="lazy"></div>
+        <div class="step"><div class="step-top"><b>02</b><i></i></div><h3>Mostramos muestras</h3><p>Presentamos modelos, telas, colores y terminaciones.</p><img src="assets/img/proceso-2.jpg" alt="Muestras de telas" loading="lazy"></div>
+        <div class="step"><div class="step-top"><b>03</b><i></i></div><h3>Acordamos el pedido</h3><p>Definimos cantidades, talles, nombres, números y detalles técnicos.</p><img src="assets/img/proceso-3.jpg" alt="Ficha técnica del pedido" loading="lazy"></div>
+        <div class="step"><div class="step-top"><b>04</b><i></i></div><h3>Producimos</h3><p>Confeccionamos en nuestro taller, con procesos propios y control en cada etapa.</p><img src="assets/img/proceso-4.jpg" alt="Confección en el taller" loading="lazy"></div>
+        <div class="step"><div class="step-top"><b>05</b><i></i></div><h3>Controlamos la calidad</h3><p>Revisamos cada prenda: resistencia, terminación y funcionalidad.</p><img src="assets/img/proceso-5.jpg" alt="Control de calidad" loading="lazy"></div>
+        <div class="step"><div class="step-top"><b>06</b><i></i></div><h3>Entregamos</h3><p>Coordinamos la entrega para que tu equipo salga a la cancha.</p><img src="assets/img/proceso-6.jpg" alt="Cajas de entrega Taller Pacino" loading="lazy"></div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section" id="faq" style="padding-top: 0">
-    <div class="container">
-      <div class="section-head reveal">
-        <div>
-          <span class="eyebrow">Preguntas frecuentes</span>
-          <h2 class="h-display">Lo que más nos consultan</h2>
-        </div>
-      </div>
+  <section class="section" id="faq">
+    <div class="wrap faq-grid">
+      <div class="reveal"><span class="index">06.</span><h2 class="title">Preguntas <em>frecuentes.</em></h2></div>
       <div class="faq reveal">
-        <details><summary>¿Por qué no veo precios en la web?</summary><p>Cada pedido es distinto: el valor depende de la prenda, la tela, la técnica (sublimación, bordado o estampa), la cantidad y los plazos. Por eso armamos un presupuesto a medida con la información que nos mandás desde el personalizador.</p></details>
-        <details><summary>¿El diseño que armo es el final?</summary><p>Es una referencia visual para que veas la idea y nos la transmitas. Antes de producir, nuestro equipo prepara el diseño final y lo revisás con nosotros.</p></details>
-        <details><summary>¿Puedo subir el escudo de mi club, colegio o empresa?</summary><p>Sí. Podés subir tu logo en PNG, JPG o SVG para verlo aplicado. Si tenés el archivo vectorial, envialo después junto con la solicitud para la mejor calidad.</p></details>
-        <details><summary>¿Se puede personalizar nombre y número por persona?</summary><p>Sí. En la solicitud indicá las cantidades por talle y, si necesitás nombres y números individuales, contanos en los comentarios y te pedimos la lista completa.</p></details>
-        <details><summary>¿Hay cantidad mínima?</summary><p>Depende de la prenda y la técnica elegida. Lo detallamos en el presupuesto según tu pedido.</p></details>
-        <details><summary>¿Hacen talles de niños?</summary><p>Sí, en el personalizador podés cargar cantidades en talles infantiles y de adulto.</p></details>
+        <details><summary>¿Por qué no hay precios en la web?</summary><p>Cada club pide algo distinto: el valor depende de la prenda, la tela, la técnica (sublimación, bordado o estampa), la cantidad y los plazos. Por eso armamos un presupuesto a medida con la información que nos mandás desde el personalizador.</p></details>
+        <details><summary>¿El diseño que armo en la web es el final?</summary><p>Es una referencia para que veas la idea y nos la transmitas. Antes de producir preparamos el diseño final y lo aprobás con nosotros.</p></details>
+        <details><summary>¿Puedo subir el escudo de mi club?</summary><p>Sí. Podés subirlo en PNG, JPG o SVG para verlo aplicado. Si tenés el archivo vectorial, envialo con la solicitud para lograr la mejor calidad.</p></details>
+        <details><summary>¿Hacen nombre y número por jugador?</summary><p>Sí. Cargá las cantidades por talle y, si cada prenda lleva un nombre y número distinto, contanos en la solicitud y te pedimos la lista completa del plantel.</p></details>
+        <details><summary>¿Trabajan categorías infantiles?</summary><p>Sí, hacemos talles de niño y de adulto para que todas las categorías del club tengan la misma indumentaria.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <div class="reveal">
+        <h2>¿Armamos la indumentaria<br>de tu club?</h2>
+        <p>Diseñá online o escribinos: te respondemos con una propuesta y el presupuesto a medida.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-light" href="personalizar.html">Abrir el personalizador</a>
+        <a class="btn btn-outline-light" data-cfg="whatsapp-link" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
       </div>
     </div>
   </section>
 </main>
 
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
+  <div class="wrap">
+    <div class="foot-grid">
       <div>
-        <a href="index.html" class="brand" style="margin-bottom: 14px">
-          <span class="brand-mark" data-cfg="marcaCorta">IP</span>
-          <span class="brand-text"><strong data-cfg="marca">Indumentaria Personalizada</strong><span data-cfg="linea">SPORT</span></span>
-        </a>
-        <p style="max-width: 34ch">Ropa personalizada para empresas, colegios y clubes deportivos.</p>
+        <img class="foot-logo" src="assets/img/logo-word-light.png" alt="Taller Pacino">
+        <p style="margin:0;line-height:1.7">Indumentaria laboral y deportiva.<br>Empresa familiar textil.</p>
       </div>
-      <div>
-        <h4>Sitio</h4>
-        <ul><li><a href="#productos">Productos</a></li><li><a href="#disenos">Diseños</a></li><li><a href="personalizar.html">Personalizador 3D</a></li><li><a href="#faq">Preguntas</a></li></ul>
-      </div>
-      <div>
-        <h4>Sectores</h4>
-        <ul><li><a href="personalizar.html?sector=empresa">Empresas</a></li><li><a href="personalizar.html?sector=colegio">Colegios</a></li><li><a href="personalizar.html?sector=club">Clubes</a></li></ul>
-      </div>
-      <div>
-        <h4>Contacto</h4>
-        <ul>
-          <li><a data-cfg="whatsapp-link" target="_blank" rel="noopener">WhatsApp</a></li>
-          <li><a data-cfg="email-link"></a></li>
-          <li><a data-cfg="instagram-link" target="_blank" rel="noopener"></a></li>
-          <li data-cfg="ciudad"></li>
-        </ul>
-      </div>
+      <div><h4>DEPORTES</h4><ul><li><a href="personalizar.html?sector=futbol">Fútbol</a></li><li><a href="personalizar.html?sector=hockey">Hockey</a></li><li><a href="personalizar.html?sector=rugby">Rugby</a></li><li><a href="personalizar.html?sector=basquet">Básquet</a></li></ul></div>
+      <div><h4>SITIO</h4><ul><li><a href="personalizar.html">Personalizador 3D</a></li><li><a href="#catalogo">Catálogo</a></li><li><a href="#proceso">Nuestro proceso</a></li><li><a href="#faq">Preguntas</a></li></ul></div>
+      <div><h4>CONTACTO</h4><ul><li><a data-cfg="whatsapp-link" target="_blank" rel="noopener">WhatsApp</a></li><li><a data-cfg="email-link"></a></li><li><a data-cfg="instagram-link" target="_blank" rel="noopener"></a></li><li data-cfg="ciudad"></li></ul></div>
     </div>
-    <div class="footer-bottom">
-      <span>© <span data-cfg="year"></span> <span data-cfg="marca"></span>. Todos los derechos reservados.</span>
-      <a href="#top">Volver arriba ↑</a>
-    </div>
+    <div class="foot-bottom"><span>© <span data-cfg="year"></span> Taller Pacino</span><a href="#top">Volver arriba ↑</a></div>
   </div>
 </footer>
 

@@ -423,29 +423,29 @@ async function makeSheet(s, m) {
   const [fi, bi] = await Promise.all([load(front), load(back)]);
   const c = document.createElement('canvas'); c.width = 2000; c.height = 1200;
   const x = c.getContext('2d');
-  const g = x.createRadialGradient(700, 600, 100, 700, 600, 900); g.addColorStop(0, '#2b3242'); g.addColorStop(1, '#0d1015');
+  const g = x.createRadialGradient(700, 600, 100, 700, 600, 900); g.addColorStop(0, '#f1ece3'); g.addColorStop(1, '#d7cebe');
   x.fillStyle = g; x.fillRect(0, 0, 2000, 1200);
   x.drawImage(fi, 40, 160, 640, 695); x.drawImage(bi, 700, 160, 640, 695);
-  x.fillStyle = '#c6ff3d'; x.font = '800 30px Inter, sans-serif'; x.fillText(CONFIG.marca.toUpperCase(), 60, 80);
-  x.fillStyle = '#eef1f6'; x.font = '400 64px "Archivo Black", sans-serif'; x.fillText((m.name || 'Mi diseño').toUpperCase(), 60, 150);
-  x.fillStyle = '#9aa3b2'; x.font = '700 24px Inter'; x.fillText('FRENTE', 320, 900); x.fillText('ESPALDA', 975, 900);
+  x.fillStyle = '#4b4e36'; x.font = '600 26px Montserrat, sans-serif'; x.fillText((CONFIG.marca + '  ·  SPORT').toUpperCase().split('').join(String.fromCharCode(8202)), 60, 80);
+  x.fillStyle = '#1c1e1b'; x.font = '800 64px Montserrat, sans-serif'; x.fillText((m.name || 'Mi diseño').toUpperCase(), 60, 150);
+  x.fillStyle = '#5e5a50'; x.font = '600 22px Montserrat'; x.fillText('FRENTE', 320, 900); x.fillText('ESPALDA', 975, 900);
   // panel de specs
-  x.fillStyle = 'rgba(255,255,255,0.04)'; x.fillRect(1400, 0, 600, 1200);
+  x.fillStyle = '#f4f1ea'; x.fillRect(1400, 0, 600, 1200);
   let y = 110;
-  const line = (k, v) => { x.fillStyle = '#9aa3b2'; x.font = '600 22px Inter'; x.fillText(k, 1450, y); x.fillStyle = '#eef1f6'; x.font = '700 28px Inter'; x.fillText(String(v).slice(0, 30), 1450, y + 36); y += 92; };
+  const line = (k, v) => { x.fillStyle = '#5e5a50'; x.font = '600 20px Montserrat'; x.fillText(k, 1450, y); x.fillStyle = '#1c1e1b'; x.font = '700 27px Montserrat'; x.fillText(String(v).slice(0, 30), 1450, y + 36); y += 92; };
   const P = PRODUCTS[s.product];
   line('PRENDA', P.name); line('DISEÑO', PATTERNS[s.pattern]); line('TELA / TÉCNICA', `${FABRICS[s.fabric]?.label} · ${m.technique}`);
   if (P.type !== 'short' && !P.hood) line('CUELLO', COLLARS[s.collar]);
   line('TEXTOS', `${s.text.front || '—'} / ${s.text.name || '—'} ${s.text.number || ''}`);
   line('TIPOGRAFÍA', FONTS[s.text.font]?.label);
   // colores
-  x.fillStyle = '#9aa3b2'; x.font = '600 22px Inter'; x.fillText('COLORES', 1450, y);
+  x.fillStyle = '#5e5a50'; x.font = '600 20px Montserrat'; x.fillText('COLORES', 1450, y);
   const cols = [s.colors.primary, s.colors.secondary, s.colors.accent, s.colors.trim, s.colors.text];
-  cols.forEach((col, i) => { x.fillStyle = col; x.fillRect(1450 + i * 100, y + 18, 80, 56); x.strokeStyle = 'rgba(255,255,255,.3)'; x.strokeRect(1450 + i * 100, y + 18, 80, 56); x.fillStyle = '#9aa3b2'; x.font = '500 15px Inter'; x.fillText(col.toUpperCase(), 1450 + i * 100, y + 96); });
+  cols.forEach((col, i) => { x.fillStyle = col; x.fillRect(1450 + i * 100, y + 18, 80, 56); x.strokeStyle = '#cbc2b2'; x.strokeRect(1450 + i * 100, y + 18, 80, 56); x.fillStyle = '#5e5a50'; x.font = '500 15px Montserrat'; x.fillText(col.toUpperCase(), 1450 + i * 100, y + 96); });
   y += 140;
   const tot = totalOf(m.sizes);
-  if (tot) { line('CANTIDADES', `${tot} prendas`); x.fillStyle = '#9aa3b2'; x.font = '500 20px Inter'; x.fillText(Object.entries(m.sizes).map(([k, v]) => `${k}×${v}`).join('  ').slice(0, 44), 1450, y - 20); }
-  x.fillStyle = '#5d6676'; x.font = '500 18px Inter';
+  if (tot) { line('CANTIDADES', `${tot} prendas`); x.fillStyle = '#5e5a50'; x.font = '500 20px Montserrat'; x.fillText(Object.entries(m.sizes).map(([k, v]) => `${k}×${v}`).join('  ').slice(0, 44), 1450, y - 20); }
+  x.fillStyle = '#5e5a50'; x.font = '500 18px Montserrat';
   x.fillText('Vista de referencia. El diseño final se confirma antes de producir.', 60, 1150);
   return c.toDataURL('image/png');
 }
@@ -466,7 +466,7 @@ async function smallThumb(s, angle = 0.3) {
     const i = new Image(); i.onload = () => {
       const c = document.createElement('canvas'); c.width = 300; c.height = 320;
       const x = c.getContext('2d'); const g = x.createRadialGradient(150, 150, 20, 150, 160, 220);
-      g.addColorStop(0, '#2b3242'); g.addColorStop(1, '#161a23'); x.fillStyle = g; x.fillRect(0, 0, 300, 320);
+      g.addColorStop(0, '#f1ece3'); g.addColorStop(1, '#d7cebe'); x.fillStyle = g; x.fillRect(0, 0, 300, 320);
       x.drawImage(i, 0, 0, 300, 320); res(c.toDataURL('image/jpeg', 0.82));
     }; i.src = url;
   });
@@ -543,14 +543,14 @@ function renderCart(view = 'list') {
         </div>
       </div>`).join('')}
     <div class="total-units" style="margin: 14px 0 6px"><span>Total de prendas</span><strong>${total}</strong></div>
-    <button class="btn btn-ghost btn-sm" id="addAnother" style="margin-bottom: 8px">+ Diseñar otra prenda</button>
+    <button class="btn btn-outline btn-sm" id="addAnother" style="margin-bottom: 8px">+ Diseñar otra prenda</button>
 
     <form id="quoteForm" novalidate>
-      <h3 class="form-title">¿Para quién es?</h3>
+      <h3 class="form-title">¿Qué deporte?</h3>
       <div class="sector-pick">
-        ${['Empresa', 'Colegio', 'Club'].map((s) => `<label><input type="radio" name="sector" value="${s}" ${f.sector === s ? 'checked' : ''} required><span>${s}</span></label>`).join('')}
+        ${['Fútbol', 'Hockey', 'Rugby', 'Básquet', 'Otro'].map((s) => `<label><input type="radio" name="sector" value="${s}" ${f.sector === s ? 'checked' : ''} required><span>${s}</span></label>`).join('')}
       </div>
-      <div class="field"><label for="fInst">Nombre de la empresa / colegio / club *</label><input class="input" id="fInst" name="institucion" required value="${esc(f.institucion)}"></div>
+      <div class="field"><label for="fInst">Nombre del club o institución *</label><input class="input" id="fInst" name="institucion" required value="${esc(f.institucion)}"></div>
       <div class="row2">
         <div class="field"><label for="fName">Tu nombre *</label><input class="input" id="fName" name="nombre" required value="${esc(f.nombre)}" autocomplete="name"></div>
         <div class="field"><label for="fPhone">WhatsApp / Teléfono *</label><input class="input" id="fPhone" name="telefono" type="tel" required value="${esc(f.telefono)}" autocomplete="tel"></div>
@@ -560,14 +560,14 @@ function renderCart(view = 'list') {
         <div class="field"><label for="fCity">Localidad</label><input class="input" id="fCity" name="localidad" value="${esc(f.localidad)}"></div>
       </div>
       <div class="field"><label for="fDate">¿Para cuándo lo necesitás?</label><input class="input" id="fDate" name="fecha" type="date" value="${esc(f.fecha)}"></div>
-      <div class="field"><label for="fMsg">Comentarios</label><textarea class="textarea" id="fMsg" name="comentarios" placeholder="Contanos todo lo que nos ayude a cotizar: deporte, si hay sponsors, listas de nombres, presupuesto estimado…">${esc(f.comentarios)}</textarea></div>
+      <div class="field"><label for="fMsg">Comentarios</label><textarea class="textarea" id="fMsg" name="comentarios" placeholder="Contanos todo lo que nos ayude a cotizar: categorías, si hay sponsors, listas de nombres, presupuesto estimado…">${esc(f.comentarios)}</textarea></div>
       <p class="note" id="formError" style="color:#ff8a8a" hidden></p>
       <div style="display:grid;gap:10px;margin-top:8px">
-        <button class="btn btn-primary btn-block" type="submit" data-via="whatsapp">
+        <button class="btn btn-dark btn-block" type="submit" data-via="whatsapp">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8 1 3.8 1.5 5.8 1.5 6.6 0 12-5.4 12-12S18.6 0 12 0zm5.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1l-.9 1.2c-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5.3-.5c.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 2.5 1 3 .8 3.6.7.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3z"/></svg>
           Enviar solicitud por WhatsApp
         </button>
-        <button class="btn btn-ghost btn-block" type="submit" data-via="email">Enviar por email</button>
+        <button class="btn btn-outline btn-block" type="submit" data-via="email">Enviar por email</button>
       </div>
       <p class="note" style="margin-top:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>Te vamos a pedir que nos adjuntes las fichas de diseño (se descargan al enviar) y tu logo en buena calidad.</p>
     </form>`;
@@ -591,9 +591,9 @@ function renderCart(view = 'list') {
 
 function buildMessage(data, cart) {
   const L = [];
-  L.push(`*Solicitud de presupuesto — ${CONFIG.marca}*`);
+  L.push(`*Solicitud de presupuesto — ${CONFIG.marca} Sport*`);
   L.push('');
-  L.push(`Sector: ${data.sector}`);
+  L.push(`Deporte: ${data.sector}`);
   L.push(`Institución: ${data.institucion}`);
   L.push(`Contacto: ${data.nombre} · ${data.telefono}${data.email ? ' · ' + data.email : ''}`);
   if (data.localidad) L.push(`Localidad: ${data.localidad}`);
@@ -621,7 +621,7 @@ async function submitQuote(form, via) {
   const data = Object.fromEntries(new FormData(form));
   const err = $('#formError');
   const missing = [];
-  if (!data.sector) missing.push('si es empresa, colegio o club');
+  if (!data.sector) missing.push('el deporte');
   if (!data.institucion?.trim()) missing.push('el nombre de la institución');
   if (!data.nombre?.trim()) missing.push('tu nombre');
   if (!data.telefono?.trim()) missing.push('un teléfono');
@@ -661,8 +661,8 @@ async function submitQuote(form, via) {
       <p>Abrimos ${via === 'whatsapp' ? 'WhatsApp' : 'tu correo'} con el detalle de tu solicitud. Si no se abrió, escribinos a <strong>${esc(CONFIG.email)}</strong>.</p>
       <p>Se descargaron las fichas de diseño: <strong>adjuntalas</strong> al mensaje junto con tu logo en buena calidad.</p>
       <div style="display:grid;gap:10px;margin-top:20px">
-        <button class="btn btn-ghost" id="resend">Volver a abrir el mensaje</button>
-        <button class="btn btn-primary" id="newReq">Empezar una nueva solicitud</button>
+        <button class="btn btn-outline" id="resend">Volver a abrir el mensaje</button>
+        <button class="btn btn-dark" id="newReq">Empezar una nueva solicitud</button>
       </div>
     </div>`;
   $('#resend').onclick = () => (via === 'whatsapp'
@@ -706,7 +706,7 @@ if (location.hash.startsWith("#d=")) window.history.replaceState(null, "", locat
 (async () => {
   await new Promise((r) => setTimeout(r, 600));
   for (const k of Object.keys(PRODUCTS)) {
-    const s = mergeState(DEFAULT_STATE, { product: k, pattern: 'lisa', collar: k === 'chomba' ? 'polo' : 'redondo', colors: { primary: '#d9dde5', secondary: '#d9dde5', accent: '#9aa3b2', trim: '#9aa3b2', text: '#9aa3b2' }, text: { front: '', name: '', number: '' } });
+    const s = mergeState(DEFAULT_STATE, { product: k, pattern: 'lisa', collar: k === 'chomba' ? 'polo' : 'redondo', colors: { primary: '#f4f1ea', secondary: '#f4f1ea', accent: '#4b4e36', trim: '#4b4e36', text: '#4b4e36' }, text: { front: '', name: '', number: '' } });
     const img = $(`[data-prod-thumb="${k}"]`); if (img) img.src = await renderThumbnail(s, { w: 200, h: 200, angle: 0.4 });
   }
   for (const t of TEMPLATES) {

@@ -32,7 +32,16 @@ export const PATTERNS = {
   chevron:    'Chevron',
   geometrico: 'Geométrico',
   sublimado:  'Pinceladas',
+  topo:       'Topográfico',
+  halftone:   'Tramado',
+  fade:       'Degradé rayado',
+  camo:       'Facetado',
+  pinstripe:  'Rayas finas',
+  shards:     'Fragmentos',
 };
+
+/* Estampados de sublimación total: también se aplican a las mangas */
+const ALLOVER = ['topo', 'halftone', 'fade', 'camo', 'pinstripe', 'shards', 'geometrico', 'sublimado', 'degrade'];
 
 export const FONTS = {
   sport:    { label: 'Deportiva', family: 'Bebas Neue', weight: '400' },
@@ -53,11 +62,11 @@ export const FABRICS = {
 export const DEFAULT_STATE = {
   product: 'camiseta',
   collar: 'redondo',
-  pattern: 'bastones',
+  pattern: 'franja',
   fabric: 'dryfit',
-  colors: { primary: '#0b3d91', secondary: '#f5f5f5', accent: '#f2c230', sleeves: '#0b3d91', trim: '#f5f5f5', text: '#f2c230' },
+  colors: { primary: '#1c1e1b', secondary: '#4b4e36', accent: '#e6dfd3', sleeves: '#1c1e1b', trim: '#4b4e36', text: '#e6dfd3' },
   sleevesMatch: true,
-  text: { front: 'CLUB ATLÉTICO', name: 'GARCÍA', number: '10', frontNumber: true, font: 'sport', outline: true },
+  text: { front: 'CLUB ATLÉTICO', name: 'GARCÍA', number: '10', frontNumber: true, font: 'bold', outline: false },
   logo: null,          // dataURL
   logoPos: 'izq',      // izq | centro | der
   logoSize: 1,
@@ -364,6 +373,101 @@ export function paintPattern(ctx, W, H, st) {
       ctx.globalAlpha = 1;
       break;
     }
+    case 'topo': {
+      // Curvas de nivel continuas (sin corte en la costura)
+      const TAU = Math.PI * 2;
+      const ph = [rnd() * TAU, rnd() * TAU, rnd() * TAU, rnd() * TAU];
+      ctx.lineWidth = Math.max(2, H * 0.0045);
+      for (let i = -4; i < 34; i++) {
+        const base = (i / 30) * H;
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += 8) {
+          const u = x / W;
+          const y = base + H * 0.05 * Math.sin(TAU * 2 * u + ph[0] + i * 0.22) + H * 0.035 * Math.sin(TAU * 5 * u + ph[1] - i * 0.15)
+            + H * 0.02 * Math.sin(TAU * 9 * u + ph[2] + i * 0.4) + H * 0.04 * Math.sin(TAU * 3 * u + ph[3]) * (i / 30);
+          x ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+        }
+        ctx.strokeStyle = i % 5 === 0 ? A : S;
+        ctx.globalAlpha = i % 5 === 0 ? 0.9 : 0.45;
+        ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+      break;
+    }
+    case 'halftone': {
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, P); g.addColorStop(1, shade(P, -0.08));
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      const step = H / 34;
+      ctx.fillStyle = S;
+      for (let row = 0, y = step / 2; y < H + step; y += step, row++) {
+        const t = Math.max(0, (y / H - 0.25) / 0.75);
+        const r = step * 0.52 * Math.pow(t, 1.15);
+        if (r < 0.6) continue;
+        for (let x = (row % 2) * step / 2; x < W + step; x += step) { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }
+      }
+      ctx.fillStyle = A; ctx.fillRect(0, H * 0.205, W, H * 0.01);
+      break;
+    }
+    case 'fade': {
+      const g = ctx.createLinearGradient(0, 0, 0, H);
+      g.addColorStop(0, P); g.addColorStop(0.55, P); g.addColorStop(1, shade(S, -0.05));
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.save();
+      ctx.strokeStyle = S; ctx.lineWidth = H * 0.008;
+      for (let x = -H; x < W + H; x += H * 0.035) {
+        const grd = ctx.createLinearGradient(0, H * 0.15, 0, H);
+        grd.addColorStop(0, 'rgba(0,0,0,0)'); grd.addColorStop(1, S);
+        ctx.strokeStyle = grd;
+        ctx.beginPath(); ctx.moveTo(x, H); ctx.lineTo(x + H * 0.85, H * 0.15); ctx.stroke();
+      }
+      ctx.restore();
+      ctx.fillStyle = A; ctx.fillRect(0, H * 0.94, W, H * 0.06);
+      break;
+    }
+    case 'camo': {
+      // Malla de triángulos con variaciones de tono (efecto facetado)
+      const cols = 28, rows = 11, cw = W / cols, rh = H / rows;
+      const pts = [];
+      for (let j = 0; j <= rows; j++) { pts[j] = []; for (let i = 0; i <= cols; i++) {
+        const jx = i === 0 || i === cols ? 0 : (rnd() - 0.5) * cw * 0.7;
+        pts[j][i] = [i * cw + jx, j * rh + (rnd() - 0.5) * rh * 0.6];
+      } pts[j][cols][1] = pts[j][0][1]; }
+      const tri = (a, b, c) => {
+        const k = rnd();
+        ctx.fillStyle = k > 0.95 ? S : k > 0.88 ? shade(A, -0.05) : shade(P, (rnd() - 0.5) * 0.16);
+        ctx.beginPath(); ctx.moveTo(...a); ctx.lineTo(...b); ctx.lineTo(...c); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = ctx.fillStyle; ctx.lineWidth = 1.5; ctx.stroke();
+      };
+      for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) {
+        const a = pts[j][i], b = pts[j][i + 1], c = pts[j + 1][i], d = pts[j + 1][i + 1];
+        if ((i + j) % 2) { tri(a, b, d); tri(a, d, c); } else { tri(a, b, c); tri(b, d, c); }
+      }
+      break;
+    }
+    case 'pinstripe': {
+      ctx.fillStyle = S; ctx.globalAlpha = 0.55;
+      const per = W / 72;
+      for (let k = 0; k < 72; k++) ctx.fillRect(k * per, 0, Math.max(2, per * 0.08), H);
+      ctx.globalAlpha = 1;
+      // banda en V sobre el pecho
+      const vb = (cx) => { ctx.beginPath(); ctx.moveTo(cx - W * 0.25, H * 0.08); ctx.lineTo(cx, H * 0.36); ctx.lineTo(cx + W * 0.25, H * 0.08);
+        ctx.lineTo(cx + W * 0.25, H * 0.14); ctx.lineTo(cx, H * 0.42); ctx.lineTo(cx - W * 0.25, H * 0.14); ctx.closePath(); ctx.fillStyle = A; ctx.fill(); };
+      vb(F);
+      break;
+    }
+    case 'shards': {
+      const shard = (pts, col, alpha) => { ctx.globalAlpha = alpha; ctx.fillStyle = col; ctx.beginPath(); pts.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y))); ctx.closePath(); ctx.fill(); };
+      const side = (cx, d) => {
+        shard([[cx - d * W * 0.02, H * 0.15], [cx + d * W * 0.2, H * 0.02], [cx + d * W * 0.24, H * 0.2], [cx + d * W * 0.06, H * 0.62]], S, 0.95);
+        shard([[cx + d * W * 0.08, H * 0.55], [cx + d * W * 0.24, H * 0.24], [cx + d * W * 0.25, H * 0.9]], shade(S, -0.12), 0.9);
+        shard([[cx - d * W * 0.04, H * 0.66], [cx + d * W * 0.07, H * 0.6], [cx + d * W * 0.14, H * 1.0], [cx - d * W * 0.08, H * 1.0]], A, 0.85);
+        shard([[cx - d * W * 0.2, H * 0.7], [cx - d * W * 0.06, H * 0.8], [cx - d * W * 0.16, H * 1.0]], shade(P, 0.08), 1);
+      };
+      side(F, 1); side(0, -1); side(W, -1);
+      ctx.globalAlpha = 1;
+      break;
+    }
     default: break;
   }
 }
@@ -454,6 +558,7 @@ export function paintSleeve(canvas, st) {
   const ctx = canvas.getContext('2d');
   const col = st.sleevesMatch ? st.colors.primary : st.colors.sleeves;
   ctx.fillStyle = col; ctx.fillRect(0, 0, W, H);
+  if (st.sleevesMatch && ALLOVER.includes(st.pattern)) paintPattern(ctx, W, H, st);
   if (st.sleevesMatch && (st.pattern === 'bastones')) {
     ctx.fillStyle = st.colors.secondary;
     const period = W / 6; for (let k = 0; k < 7; k++) ctx.fillRect(k * period - period * 0.25, 0, period * 0.5, H);

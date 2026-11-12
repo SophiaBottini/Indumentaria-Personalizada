@@ -1,41 +1,34 @@
-/* Plantillas de diseño ("tipos de diseño") listas para aplicar */
+/* Plantillas de diseño ("tipos de diseño") listas para aplicar.
+   Colores de marca Taller Pacino: negro #1c1e1b, oliva #4b4e36, beige #e6dfd3, topo #9c9384 */
+const K = '#1c1e1b', O = '#4b4e36', B = '#e6dfd3', T = '#9c9384', W = '#f4f1ea';
 export const TEMPLATES = [
-  { id: 'clasica', name: 'Clásica a bastones', sector: 'Clubes', state: { product: 'camiseta', pattern: 'bastones', collar: 'redondo', colors: { primary: '#0b3d91', secondary: '#f5f5f5', accent: '#f2c230', trim: '#0b3d91', text: '#f2c230' } } },
-  { id: 'banda', name: 'Banda diagonal', sector: 'Clubes', state: { product: 'camiseta', pattern: 'diagonal', collar: 'v', colors: { primary: '#f7f7f7', secondary: '#d62828', accent: '#141414', trim: '#d62828', text: '#141414' } } },
-  { id: 'franja', name: 'Franja pecho', sector: 'Clubes', state: { product: 'camiseta', pattern: 'franja', collar: 'redondo', colors: { primary: '#141414', secondary: '#f2c230', accent: '#ffffff', trim: '#f2c230', text: '#ffffff' } } },
-  { id: 'degrade', name: 'Degradé Pro', sector: 'Running / Training', state: { product: 'camiseta', pattern: 'degrade', collar: 'v', colors: { primary: '#0a1a3a', secondary: '#1fb6ff', accent: '#c6ff3d', trim: '#0a1a3a', text: '#c6ff3d' } } },
-  { id: 'mitades', name: 'Mitades', sector: 'Clubes', state: { product: 'camiseta', pattern: 'mitades', collar: 'redondo', colors: { primary: '#c1121f', secondary: '#1d3557', accent: '#f1faee', trim: '#f1faee', text: '#f1faee' } } },
-  { id: 'training', name: 'Training laterales', sector: 'Entrenamiento', state: { product: 'camiseta', pattern: 'laterales', collar: 'v', colors: { primary: '#1b1b1b', secondary: '#ff6b00', accent: '#ffffff', trim: '#ff6b00', text: '#ff6b00' } } },
-  { id: 'hockey', name: 'Hombros contraste', sector: 'Hockey / Vóley', state: { product: 'camiseta', pattern: 'hombros', collar: 'v', colors: { primary: '#2a9d8f', secondary: '#264653', accent: '#e9c46a', trim: '#264653', text: '#ffffff' } } },
-  { id: 'basquet', name: 'Básquet Chevron', sector: 'Básquet', state: { product: 'musculosa', pattern: 'chevron', collar: 'v', colors: { primary: '#5a189a', secondary: '#ff9e00', accent: '#ffffff', trim: '#ff9e00', text: '#ffffff' } } },
-  { id: 'geo', name: 'Geométrica', sector: 'Sublimación total', state: { product: 'camiseta', pattern: 'geometrico', collar: 'redondo', colors: { primary: '#0d1b2a', secondary: '#00b4d8', accent: '#ff006e', trim: '#00b4d8', text: '#ffffff' } } },
-  { id: 'pinceladas', name: 'Pinceladas', sector: 'Sublimación total', state: { product: 'camiseta', pattern: 'sublimado', collar: 'v', colors: { primary: '#f8f9fa', secondary: '#06d6a0', accent: '#118ab2', trim: '#118ab2', text: '#073b4c' } } },
-  { id: 'corporativa', name: 'Corporativa', sector: 'Empresas', state: { product: 'chomba', pattern: 'lisa', collar: 'polo', fabric: 'pique', colors: { primary: '#1d3557', secondary: '#1d3557', accent: '#a8dadc', trim: '#f1faee', text: '#f1faee' }, text: { front: '', name: '', number: '', frontNumber: false, font: 'moderna', outline: false } } },
-  { id: 'egresados', name: 'Egresados', sector: 'Colegios', state: { product: 'buzo', pattern: 'lisa', fabric: 'frisa', colors: { primary: '#2b2d42', secondary: '#2b2d42', accent: '#ef233c', trim: '#ef233c', text: '#edf2f4' }, text: { front: 'PROMO 2027', name: 'SOFI', number: '27', frontNumber: false, font: 'college', outline: false } } },
+  { id: 'futbol', name: 'Topográfica', sector: 'Fútbol', state: { product: 'camiseta', pattern: 'topo', collar: 'v', colors: { primary: K, secondary: O, accent: B, trim: B, text: B }, text: { front: 'CLUB ATLÉTICO', name: 'GARCÍA', number: '9', frontNumber: true, font: 'bold', outline: false } } },
+  { id: 'franja', name: 'Franja pecho', sector: 'Fútbol', state: { product: 'camiseta', pattern: 'franja', collar: 'v', colors: { primary: K, secondary: O, accent: B, trim: O, text: B } } },
+  { id: 'bastones', name: 'Bastones clásicos', sector: 'Fútbol', state: { product: 'camiseta', pattern: 'bastones', collar: 'redondo', colors: { primary: O, secondary: W, accent: K, trim: K, text: K } } },
+  { id: 'pinstripe', name: 'Rayas finas', sector: 'Fútbol', state: { product: 'camiseta', pattern: 'pinstripe', collar: 'v', colors: { primary: K, secondary: B, accent: O, trim: O, text: B } } },
+  { id: 'banda', name: 'Banda diagonal', sector: 'Fútbol', state: { product: 'camiseta', pattern: 'diagonal', collar: 'v', colors: { primary: W, secondary: O, accent: K, trim: K, text: K } } },
+  { id: 'hockey', name: 'Tramado', sector: 'Hockey', state: { product: 'camiseta', pattern: 'halftone', collar: 'v', colors: { primary: W, secondary: O, accent: K, trim: O, text: K }, text: { front: 'HOCKEY CLUB', name: 'LÓPEZ', number: '7', frontNumber: true, font: 'moderna', outline: false } } },
+  { id: 'hockey2', name: 'Hockey mitades', sector: 'Hockey', state: { product: 'camiseta', pattern: 'mitades', collar: 'v', colors: { primary: K, secondary: O, accent: B, trim: B, text: B }, text: { front: 'HOCKEY CLUB', name: 'LÓPEZ', number: '7', frontNumber: true, font: 'moderna', outline: false } } },
+  { id: 'rugby', name: 'Rugby facetada', sector: 'Rugby', state: { product: 'chomba', collar: 'polo', pattern: 'camo', fabric: 'pique', colors: { primary: K, secondary: B, accent: O, trim: B, text: B }, text: { front: 'RUGBY CLUB', name: 'PÉREZ', number: '15', frontNumber: false, font: 'bold', outline: false } } },
+  { id: 'rugby2', name: 'Rugby a rayas', sector: 'Rugby', state: { product: 'chomba', collar: 'polo', pattern: 'rayas', fabric: 'pique', colors: { primary: O, secondary: K, accent: B, trim: K, text: B }, text: { front: 'RUGBY CLUB', name: 'PÉREZ', number: '15', frontNumber: false, font: 'bold', outline: false } } },
+  { id: 'basquet', name: 'Fragmentos', sector: 'Básquet', state: { product: 'musculosa', pattern: 'shards', collar: 'v', colors: { primary: W, secondary: O, accent: K, trim: K, text: K }, text: { front: 'BÁSQUET', name: 'DÍAZ', number: '23', frontNumber: true, font: 'bold', outline: false } } },
+  { id: 'basquet2', name: 'Básquet chevron', sector: 'Básquet', state: { product: 'musculosa', pattern: 'chevron', collar: 'v', colors: { primary: O, secondary: B, accent: K, trim: B, text: B }, text: { front: 'BÁSQUET', name: 'DÍAZ', number: '23', frontNumber: true, font: 'bold', outline: false } } },
+  { id: 'training', name: 'Entrenamiento', sector: 'Training', state: { product: 'mangalarga', pattern: 'fade', colors: { primary: K, secondary: O, accent: B, trim: K, text: B } } },
+  { id: 'viaje', name: 'Buzo de viaje', sector: 'Viaje', state: { product: 'buzo', pattern: 'lisa', fabric: 'frisa', colors: { primary: O, secondary: O, accent: B, trim: K, text: B }, text: { front: 'CLUB ATLÉTICO', name: 'GARCÍA', number: '10', frontNumber: false, font: 'bold', outline: false } } },
+  { id: 'staff', name: 'Cuerpo técnico', sector: 'Staff', state: { product: 'chomba', collar: 'polo', pattern: 'lisa', fabric: 'pique', colors: { primary: K, secondary: K, accent: O, trim: O, text: B }, text: { front: '', name: '', number: '', frontNumber: false, font: 'moderna', outline: false } } },
 ];
 
-/* Presets por sector (desde la portada) */
-export const SECTOR_PRESETS = {
-  club: 'clasica',
-  colegio: 'egresados',
-  empresa: 'corporativa',
-};
+/* Diseño base por deporte (portada → personalizador) */
+export const SECTOR_PRESETS = { futbol: 'futbol', hockey: 'hockey', rugby: 'rugby', basquet: 'basquet' };
 
-/* Paletas sugeridas */
+/* Paletas sugeridas: marca + colores clásicos de club */
 export const PALETTES = [
-  ['#0b3d91', '#f5f5f5', '#f2c230'],
-  ['#c1121f', '#ffffff', '#141414'],
-  ['#141414', '#f2c230', '#ffffff'],
-  ['#1b5e20', '#ffffff', '#f2c230'],
-  ['#5a189a', '#ff9e00', '#ffffff'],
-  ['#0a1a3a', '#1fb6ff', '#c6ff3d'],
-  ['#ffffff', '#87ceeb', '#0b2545'],
-  ['#7b1e3a', '#f2e8cf', '#c9a227'],
-  ['#ff6b00', '#1b1b1b', '#ffffff'],
-  ['#2a9d8f', '#264653', '#e9c46a'],
+  [K, O, B], [O, W, K], [W, O, K], [K, T, W],
+  ['#0b3d91', '#ffffff', '#f2c230'], ['#c1121f', '#ffffff', '#141414'], ['#1b5e20', '#ffffff', '#f2c230'],
+  ['#ffffff', '#87ceeb', '#0b2545'], ['#5a189a', '#ffffff', '#ff9e00'], ['#7b1e3a', '#f2e8cf', '#c9a227'],
 ];
 
-export const SWATCHES = ['#ffffff', '#f5f5f5', '#141414', '#2b2d42', '#0b3d91', '#1fb6ff', '#87ceeb', '#0a1a3a', '#c1121f', '#d62828', '#7b1e3a', '#ff6b00', '#f2c230', '#ffd60a', '#c6ff3d', '#1b5e20', '#2a9d8f', '#06d6a0', '#5a189a', '#ff006e', '#a8dadc', '#8d99ae', '#c9a227', '#f2e8cf'];
+export const SWATCHES = ['#ffffff', W, B, T, O, '#2c2f24', K, '#000000', '#0b3d91', '#1f7ae0', '#87ceeb', '#0a1a3a', '#c1121f', '#7b1e3a', '#ff6b00', '#f2c230', '#1b5e20', '#2a9d8f', '#5a189a', '#ff006e', '#a8dadc', '#8d99ae', '#c9a227', '#f2e8cf'];
 
 import { DEFAULT_STATE, cloneState } from './garment.js';
 
