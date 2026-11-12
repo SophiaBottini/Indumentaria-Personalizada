@@ -546,9 +546,9 @@ function renderCart(view = 'list') {
     <button class="btn btn-outline btn-sm" id="addAnother" style="margin-bottom: 8px">+ Diseñar otra prenda</button>
 
     <form id="quoteForm" novalidate>
-      <h3 class="form-title">¿Qué deporte?</h3>
+      <h3 class="form-title">¿Para qué es?</h3>
       <div class="sector-pick">
-        ${['Fútbol', 'Hockey', 'Rugby', 'Básquet', 'Otro'].map((s) => `<label><input type="radio" name="sector" value="${s}" ${f.sector === s ? 'checked' : ''} required><span>${s}</span></label>`).join('')}
+        ${['Fútbol', 'Hockey', 'Rugby', 'Básquet', 'Laboral', 'Otro'].map((s) => `<label><input type="radio" name="sector" value="${s}" ${f.sector === s ? 'checked' : ''} required><span>${s}</span></label>`).join('')}
       </div>
       <div class="field"><label for="fInst">Nombre del club o institución *</label><input class="input" id="fInst" name="institucion" required value="${esc(f.institucion)}"></div>
       <div class="row2">
@@ -593,7 +593,7 @@ function buildMessage(data, cart) {
   const L = [];
   L.push(`*Solicitud de presupuesto — ${CONFIG.marca} Sport*`);
   L.push('');
-  L.push(`Deporte: ${data.sector}`);
+  L.push(`Rubro / deporte: ${data.sector}`);
   L.push(`Institución: ${data.institucion}`);
   L.push(`Contacto: ${data.nombre} · ${data.telefono}${data.email ? ' · ' + data.email : ''}`);
   if (data.localidad) L.push(`Localidad: ${data.localidad}`);
@@ -621,7 +621,7 @@ async function submitQuote(form, via) {
   const data = Object.fromEntries(new FormData(form));
   const err = $('#formError');
   const missing = [];
-  if (!data.sector) missing.push('el deporte');
+  if (!data.sector) missing.push('para qué es (deporte o laboral)');
   if (!data.institucion?.trim()) missing.push('el nombre de la institución');
   if (!data.nombre?.trim()) missing.push('tu nombre');
   if (!data.telefono?.trim()) missing.push('un teléfono');

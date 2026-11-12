@@ -1,169 +1,148 @@
-import { applyConfig } from './config.js';
-import { GarmentViewer, PRODUCTS, PATTERNS, FABRICS, DEFAULT_STATE, renderThumbnail } from './garment.js';
+import { CONFIG, applyConfig } from './config.js';
+import { GarmentViewer, PATTERNS, DEFAULT_STATE, renderThumbnail } from './garment.js';
 import { PALETTES, stateFromTemplate, mergeState } from './templates.js';
 
 applyConfig();
-
 const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-/* Header con sombra al hacer scroll */
-const header = $('.site-header');
-const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 10);
-window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+const waText = $('#waText'); if (waText) waText.textContent = '+' + CONFIG.whatsapp;
+const waLink = (msg) => `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
 
-/* Animaciones de aparición */
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { threshold: 0.1 });
-document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+/* ---------------- Hero: dos líneas ---------------- */
+const slides = $$('.hero-slide'), dots = $$('#heroDots button');
+let cur = 0, auto = true, heroViewer = null;
+function go(i) {
+  cur = (i + slides.length) % slides.length;
+  slides.forEach((s, k) => s.classList.toggle('active', k === cur));
+  dots.forEach((d, k) => d.classList.toggle('active', k === cur));
+  $('.hero2').classList.toggle('dark-on', cur === 1);
+  if (cur === 1 && !heroViewer) startHero3D();
+}
+dots.forEach((d, k) => d.onclick = () => { auto = false; go(k); });
+$('#heroPrev').onclick = () => { auto = false; go(cur - 1); };
+$('#heroNext').onclick = () => { auto = false; go(cur + 1); };
+setInterval(() => { if (auto && !document.hidden) go(cur + 1); }, 6500);
+function startHero3D() {
+  try {
+    heroViewer = new GarmentViewer($('#heroStage'), { autoRotate: true, zoom: false });
+    heroViewer.camera.position.set(2.2, 0.4, 8.2);
+    const s = stateFromTemplate('futbol'); s.text.front = 'PACINO';
+    heroViewer.setState(s);
+    $('#heroStage').addEventListener('pointerdown', () => { auto = false; });
+  } catch (e) { console.warn('3D no disponible', e); }
+}
 
-const K = '#1c1e1b', O = '#4b4e36', B = '#e6dfd3', W = '#f4f1ea';
-const lum = (h) => { const n = parseInt(h.slice(1), 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
-
-/* ---------------- Hero 3D por deporte ---------------- */
-const SPORTS = [
-  { key: 'futbol', label: 'Fútbol', tpl: 'futbol', num: '10' },
-  { key: 'hockey', label: 'Hockey', tpl: 'hockey', num: '7' },
-  { key: 'rugby', label: 'Rugby', tpl: 'rugby', num: '15' },
-  { key: 'basquet', label: 'Básquet', tpl: 'basquet', num: '23' },
+/* ---------------- Línea laboral ---------------- */
+const LABORAL = [
+  { img: 'trabajo-carniceria.jpg', cat: 'Carnicerías · Alimentos', name: 'Chomba con logo', text: 'Chomba de piqué con tu logo bordado en el pecho. Combina con pantalón cargo y gorra.', logo: 'Bordado', uso: 'Atención al público', prenda: 'Chomba', d3: 'personalizar.html?producto=chomba&plantilla=staff' },
+  { img: 'prod-pantalon-cargo.jpg', cat: 'Talleres · Industria', name: 'Pantalón cargo', text: 'Pantalón de trabajo con bolsillos laterales y cintura reforzada, pensado para el uso diario.', logo: 'Bordado', uso: 'Trabajo intensivo', prenda: 'Pantalón cargo' },
+  { img: 'prod-camisa-trabajo.jpg', cat: 'Talleres · Industria', name: 'Camisa de trabajo', text: 'Camisa de tela resistente con bolsillos frontales y logo bordado en el bolsillo.', logo: 'Bordado', uso: 'Industria y logística', prenda: 'Camisa' },
+  { img: 'prod-camisa.jpg', cat: 'Comercios · Empresas', name: 'Camisa manga corta', text: 'Camisa de vestir de corte clásico, con tu logo bordado en el pecho.', logo: 'Bordado', uso: 'Oficina y mostrador', prenda: 'Camisa' },
+  { img: 'prod-remera.jpg', cat: 'Comercios · Empresas', name: 'Remera con logo', text: 'Remera de algodón peinado con logo en el frente y diseño completo en la espalda.', logo: 'Estampado o bordado', uso: 'Equipos y eventos', prenda: 'Remera', d3: 'personalizar.html?producto=camiseta&plantilla=staff' },
+  { img: 'prod-conjunto.jpg', cat: 'Servicios · Lavaderos', name: 'Remera + bermuda', text: 'Conjunto de remera estampada y bermuda cargo para trabajos al aire libre.', logo: 'Estampado', uso: 'Servicios', prenda: 'Bermuda' },
 ];
-const tabs = $('#sportTabs');
-let hero, heroIdx = 0, touched = false;
+const grid = $('#laboralGrid');
+LABORAL.forEach((p) => {
+  const el = document.createElement('article');
+  el.className = 'pcard';
+  const msg = `Hola ${CONFIG.marca}! Quiero cotizar: ${p.name}. ¿Me pasan presupuesto?`;
+  el.innerHTML = `
+    <div class="pcard-media"><img src="assets/img/${p.img}" alt="${p.name}" loading="lazy"></div>
+    <span class="mono">${p.cat}</span>
+    <h3>${p.name}</h3>
+    <p>${p.text}</p>
+    <dl><div><dt>Logo</dt><dd>${p.logo}</dd></div><div><dt>Ideal para</dt><dd>${p.uso}</dd></div></dl>
+    <div class="pc-actions">
+      <a class="btn btn-wa" href="${waLink(msg)}" target="_blank" rel="noopener">Cotizar por WhatsApp →</a>
+      <button class="link-mono" type="button" data-add="${p.prenda}">Sumar al presupuesto</button>
+      ${p.d3 ? `<a class="link-mono" href="${p.d3}">Ver en 3D</a>` : ''}
+    </div>`;
+  grid.appendChild(el);
+});
+grid.addEventListener('click', (e) => {
+  const b = e.target.closest('[data-add]'); if (!b) return;
+  const cb = $(`#qPrendas input[value="${b.dataset.add}"]`); if (cb) cb.checked = true;
+  $('#contacto').scrollIntoView({ behavior: 'smooth' });
+});
+$$('.rubro[data-rubro]').forEach((a) => a.addEventListener('click', () => {
+  const sel = $('#qRubro'); const v = a.dataset.rubro;
+  [...sel.options].forEach((o) => { if (o.text === v) sel.value = v; });
+}));
+
+/* ---------------- Línea deportiva ---------------- */
+const SPORTS = [
+  { label: 'Fútbol', tpl: 'futbol', num: '10', items: 'Camiseta · Short · Arquero' },
+  { label: 'Hockey', tpl: 'hockey', num: '7', items: 'Camiseta · Pollera · Buzo' },
+  { label: 'Rugby', tpl: 'rugby', num: '15', items: 'Camiseta · Short · Viaje' },
+  { label: 'Básquet', tpl: 'basquet', num: '23', items: 'Musculosa · Short' },
+];
+const PATS = ['topo', 'halftone', 'fade', 'camo', 'pinstripe', 'shards', 'franja', 'bastones'];
+let sportState = stateFromTemplate('futbol'), sportViewer = null;
+const lum = (h) => { const n = parseInt(h.slice(1), 16); return (0.299 * (n >> 16) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255)) / 255; };
+const list = $('#sportList');
 SPORTS.forEach((s, i) => {
   const b = document.createElement('button');
-  b.textContent = s.label; b.setAttribute('role', 'tab');
-  b.onclick = () => { touched = true; showSport(i); };
-  tabs.appendChild(b);
+  b.setAttribute('role', 'tab');
+  b.innerHTML = `<span>${s.label}</span><span class="mono">${s.items}</span>`;
+  b.onclick = () => { sportState = stateFromTemplate(s.tpl); $('#sportNum').textContent = s.num; syncSport(); };
+  list.appendChild(b);
 });
-function heroState(i) {
-  const s = stateFromTemplate(SPORTS[i].tpl);
-  s.text.front = 'PACINO'; s.text.number = SPORTS[i].num;
-  return s;
-}
-async function showSport(i) {
-  heroIdx = i;
-  [...tabs.children].forEach((b, k) => { b.classList.toggle('active', k === i); b.setAttribute('aria-selected', k === i); });
-  $('#heroNum').textContent = SPORTS[i].num;
-  await hero.setState(heroState(i));
-}
-try {
-  hero = new GarmentViewer($('#heroStage'), { autoRotate: true, zoom: false });
-  hero.camera.position.set(2.4, 0.45, 8.2);
-  showSport(0);
-  setInterval(() => { if (!touched && !document.hidden) showSport((heroIdx + 1) % SPORTS.length); }, 5000);
-  $('#heroStage').addEventListener('pointerdown', () => { touched = true; });
-} catch (e) {
-  console.warn('WebGL no disponible', e);
-}
-
-/* ---------------- Deportes ---------------- */
-const SPORT_CARDS = [
-  { key: 'futbol', title: 'Fútbol', tpl: 'futbol', text: 'Camisetas de juego y arquero, shorts y conjuntos de entrenamiento.', tags: ['Camiseta', 'Short', 'Arquero'] },
-  { key: 'hockey', title: 'Hockey', tpl: 'hockey', text: 'Camisetas livianas con sublimación total y numeración por jugadora.', tags: ['Camiseta', 'Pollera', 'Buzo'] },
-  { key: 'rugby', title: 'Rugby', tpl: 'rugby', text: 'Camisetas de alta resistencia con costuras reforzadas y cuello polo.', tags: ['Camiseta', 'Short', 'Viaje'] },
-  { key: 'basquet', title: 'Básquet', tpl: 'basquet', text: 'Musculosas y shorts de micropanal con máxima ventilación.', tags: ['Musculosa', 'Short', 'Calentamiento'] },
-];
-const sportsGrid = $('#sportsGrid');
-for (const c of SPORT_CARDS) {
-  const a = document.createElement('a');
-  a.className = 'sport-card reveal'; a.href = `personalizar.html?sector=${c.key}`;
-  a.innerHTML = `<div class="sport-media"><div class="skeleton"></div></div>
-    <div class="sport-body"><h3>${c.title}</h3><p>${c.text}</p>
-    <div class="tags">${c.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>
-    <span class="more">Diseñar</span></div>`;
-  sportsGrid.appendChild(a); io.observe(a);
-}
-
-/* ---------------- Personalizador demo ---------------- */
-const DEMO_PRODUCTS = ['camiseta', 'musculosa', 'chomba', 'mangalarga'];
-const DEMO_PATTERNS = ['topo', 'halftone', 'fade', 'camo', 'pinstripe', 'shards', 'franja', 'bastones'];
-let demoState = mergeState(DEFAULT_STATE, { pattern: 'topo', collar: 'v' });
-let demo;
-const chip = (label, active, on) => { const b = document.createElement('button'); b.className = 'chip' + (active ? ' active' : ''); b.textContent = label; b.onclick = on; return b; };
-function renderDemoUI() {
-  const pEl = $('#demoProducts'); pEl.innerHTML = '';
-  DEMO_PRODUCTS.forEach((k) => pEl.appendChild(chip(PRODUCTS[k].short, demoState.product === k, () => setDemo((s) => {
-    s.product = k; s.collar = k === 'chomba' ? 'polo' : 'v'; s.fabric = k === 'chomba' ? 'pique' : k === 'musculosa' ? 'micropanal' : 'dryfit';
-  }))));
-  const tEl = $('#demoPatterns'); tEl.innerHTML = '';
-  DEMO_PATTERNS.forEach((k) => tEl.appendChild(chip(PATTERNS[k], demoState.pattern === k, () => setDemo((s) => { s.pattern = k; }))));
-  const cEl = $('#demoPalettes'); cEl.innerHTML = '';
-  PALETTES.forEach(([a, b, c]) => {
-    const btn = document.createElement('button');
-    btn.style.setProperty('--a', a); btn.style.setProperty('--b', b); btn.style.setProperty('--c', c);
-    btn.setAttribute('aria-label', `Colores ${a}, ${b} y ${c}`);
-    if (demoState.colors.primary === a && demoState.colors.secondary === b) btn.classList.add('active');
-    btn.onclick = () => setDemo((s) => {
-      const text = lum(a) > 0.6 ? (lum(c) < 0.5 ? c : K) : (lum(c) > 0.5 ? c : W);
-      s.colors = { ...s.colors, primary: a, secondary: b, accent: c, sleeves: a, trim: c, text };
-    });
-    cEl.appendChild(btn);
+function syncSport() {
+  $$('#sportList button').forEach((b, i) => { const on = stateFromTemplate(SPORTS[i].tpl).product === sportState.product && SPORTS[i].num === $('#sportNum').textContent; b.classList.toggle('active', on); b.setAttribute('aria-selected', on); });
+  const pc = $('#patternChips'); pc.innerHTML = '';
+  PATS.forEach((k) => { const b = document.createElement('button'); b.className = 'chip' + (sportState.pattern === k ? ' active' : ''); b.textContent = PATTERNS[k]; b.onclick = () => { sportState.pattern = k; syncSport(); }; pc.appendChild(b); });
+  const pl = $('#paletteList'); pl.innerHTML = '';
+  PALETTES.forEach(([a, b2, c]) => {
+    const b = document.createElement('button');
+    b.style.setProperty('--a', a); b.style.setProperty('--b', b2); b.style.setProperty('--c', c);
+    b.setAttribute('aria-label', `Colores ${a}, ${b2} y ${c}`);
+    if (sportState.colors.primary === a && sportState.colors.secondary === b2) b.classList.add('active');
+    b.onclick = () => { const text = lum(a) > 0.6 ? (lum(c) < 0.5 ? c : '#1c1e1b') : (lum(c) > 0.5 ? c : '#f4f1ea'); sportState.colors = { ...sportState.colors, primary: a, secondary: b2, accent: c, sleeves: a, trim: c, text }; syncSport(); };
+    pl.appendChild(b);
   });
-  const s = demoState, dots = `<span class="dots">${[s.colors.primary, s.colors.secondary, s.colors.accent].map((c) => `<i style="background:${c}"></i>`).join('')}</span>`;
-  $('#demoSpec').innerHTML = [['Prenda', PRODUCTS[s.product].name], ['Diseño', PATTERNS[s.pattern]], ['Tela', FABRICS[s.fabric].label], ['Colores', dots], ['Nombre / Nº', `${s.text.name} · ${s.text.number}`]]
-    .map(([k, v]) => `<div><dt>${k}</dt><dd>${v}</dd></div>`).join('');
-  const share = { ...s }; delete share.logo;
-  $('#demoGo').href = `personalizar.html#d=${btoa(unescape(encodeURIComponent(JSON.stringify(share))))}`;
+  const share = { ...sportState }; delete share.logo;
+  $('#sportGo').href = `personalizar.html#d=${btoa(unescape(encodeURIComponent(JSON.stringify(share))))}`;
+  if (sportViewer) sportViewer.setState(sportState, { pop: false });
 }
-function setDemo(fn) { fn(demoState); renderDemoUI(); if (demo) demo.setState(demoState, { pop: false }); }
-renderDemoUI();
+syncSport();
+new IntersectionObserver(([e], obs) => {
+  if (!e.isIntersecting) return; obs.disconnect();
+  try { sportViewer = new GarmentViewer($('#sportStage'), { autoRotate: true, zoom: false }); sportViewer.setState(sportState); }
+  catch (err) { console.warn(err); }
+}, { rootMargin: '300px' }).observe($('#sportStage'));
 
-let demoStarted = false;
-const demoIO = new IntersectionObserver(([e]) => {
-  if (!e.isIntersecting || demoStarted) return;
-  demoStarted = true;
+/* Miniatura 3D en la tarjeta de clubes */
+setTimeout(async () => {
   try {
-    demo = new GarmentViewer($('#demoStage'), { autoRotate: false });
-    demo.setState(demoState);
-  } catch (err) { console.warn(err); }
-}, { rootMargin: '200px' });
-demoIO.observe($('#demoStage'));
-document.querySelectorAll('#demoViews button').forEach((b) => b.onclick = () => {
-  if (!demo) return;
-  const v = b.dataset.view;
-  document.querySelectorAll('#demoViews button').forEach((x) => x.classList.toggle('active', x === b));
-  if (v === 'rotar') demo.setAutoRotate(true); else demo.setView(v);
+    const url = await renderThumbnail(stateFromTemplate('futbol'), { w: 420, h: 460, angle: 0.4 });
+    const img = new Image(); img.src = url; img.alt = ''; $('#rubroSport').appendChild(img);
+  } catch (e) { console.warn(e); }
+}, 300);
+
+/* ---------------- Presupuesto rápido ---------------- */
+const form = $('#quickQuote');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(form));
+  const prendas = $$('#qPrendas input:checked').map((i) => i.value);
+  const err = $('#qErr'), miss = [];
+  if (!d.nombre?.trim()) miss.push('tu nombre');
+  if (!d.negocio?.trim()) miss.push('el negocio o club');
+  if (miss.length) { err.hidden = false; err.textContent = 'Falta completar ' + miss.join(' y ') + '.'; return; }
+  err.hidden = true;
+  const msg = [
+    `*Pedido de presupuesto — ${CONFIG.marca}*`, '',
+    `Nombre: ${d.nombre}`, `Negocio / club: ${d.negocio}`, `Rubro: ${d.rubro}`,
+    `Prendas: ${prendas.length ? prendas.join(', ') : 'a definir'}`,
+    `Cantidad aproximada: ${d.cantidad || 'a definir'}`, `Personalización: ${d.logo}`,
+    d.comentarios ? `Comentarios: ${d.comentarios}` : '',
+  ].filter((l) => l !== '').join('\n');
+  $('#qText').value = msg; $('#qOut').hidden = false;
+  window.open(waLink(msg), '_blank', 'noopener');
 });
-
-/* ---------------- Catálogo ---------------- */
-const CATALOG = [
-  { key: 'camiseta', title: 'Camiseta de juego', text: 'Sublimación total, liviana y respirable.', tag: 'Dry-fit', tpl: 'pinstripe' },
-  { key: 'mangalarga', title: 'Manga larga', text: 'Arqueros, invierno y primera piel térmica.', tag: 'Dry-fit', tpl: 'training' },
-  { key: 'musculosa', title: 'Musculosa', text: 'Básquet y vóley, con máxima ventilación.', tag: 'Micropanal', tpl: 'basquet2' },
-  { key: 'chomba', title: 'Chomba', text: 'Cuerpo técnico, dirigentes y staff.', tag: 'Piqué', tpl: 'staff' },
-  { key: 'buzo', title: 'Buzo de viaje', text: 'Abrigo para viajes y concentración.', tag: 'Frisa', tpl: 'viaje' },
-  { key: 'short', title: 'Short', text: 'Fútbol, rugby, hockey y entrenamiento.', tag: 'Dry-fit', tpl: 'franja' },
-];
-const productGrid = $('#productGrid');
-for (const p of CATALOG) {
-  const a = document.createElement('a');
-  a.className = 'product reveal'; a.href = `personalizar.html?producto=${p.key}&plantilla=${p.tpl}`;
-  a.innerHTML = `<div class="product-media"><div class="skeleton"></div><span class="b3d">3D</span></div>
-    <div class="product-body"><h3>${p.title}</h3><p>${p.text}</p>
-    <div class="product-foot"><span class="tag">${p.tag}</span><span class="more">Personalizar</span></div></div>`;
-  productGrid.appendChild(a); io.observe(a);
-}
-
-function setImg(container, url, cls = '') {
-  const sk = container.querySelector('.skeleton'); if (sk) sk.remove();
-  const img = new Image(); img.src = url; img.alt = ''; if (cls) img.className = cls;
-  container.prepend(img);
-}
-
-async function renderThumbs() {
-  const media = sportsGrid.querySelectorAll('.sport-media');
-  for (let i = 0; i < SPORT_CARDS.length; i++) {
-    setImg(media[i], await renderThumbnail(stateFromTemplate(SPORT_CARDS[i].tpl), { w: 520, h: 560, angle: 0.4 }));
-  }
-  const pm = productGrid.querySelectorAll('.product-media');
-  for (let i = 0; i < CATALOG.length; i++) {
-    const p = CATALOG[i];
-    const s = mergeState(stateFromTemplate(p.tpl), { product: p.key });
-    if (p.key === 'short') s.pattern = 'laterales';
-    if (p.key === 'chomba') s.collar = 'polo';
-    const back = await renderThumbnail(s, { w: 520, h: 460, angle: Math.PI - 0.35 });
-    const front = await renderThumbnail(s, { w: 520, h: 460, angle: 0.35 });
-    setImg(pm[i], back, 'back'); setImg(pm[i], front, 'front');
-  }
-}
-setTimeout(() => renderThumbs().catch((e) => console.warn(e)), 500);
+$('#qCopy').onclick = async () => {
+  const t = $('#qText');
+  try { await navigator.clipboard.writeText(t.value); $('#qCopy').textContent = 'Copiado ✓'; }
+  catch { t.select(); }
+};

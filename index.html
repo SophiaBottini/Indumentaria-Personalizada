@@ -3,197 +3,268 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Taller Pacino Sport | Indumentaria para clubes de fútbol, hockey, rugby y básquet</title>
-  <meta name="description" content="Taller Pacino diseña y confecciona indumentaria deportiva para clubes de fútbol, hockey, rugby y básquet. Diseñá tu camiseta en 3D y pedí tu presupuesto.">
+  <title>Taller Pacino | Indumentaria laboral y deportiva con tu logo</title>
+  <meta name="description" content="Taller Pacino confecciona indumentaria laboral y deportiva personalizada: chombas, pantalones cargo, camisas y remeras con tu logo para carnicerías, comercios, talleres y clubes.">
   <meta name="theme-color" content="#e6dfd3">
   <link rel="icon" href="assets/img/logo-tp.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Archivo+Black&family=Bebas+Neue&family=Graduate&family=Playfair+Display:wght@800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&family=Archivo+Black&family=Bebas+Neue&family=Graduate&family=Playfair+Display:wght@800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script type="importmap">
     { "imports": { "three": "./vendor/three/three.module.min.js", "three/addons/": "./vendor/three/addons/" } }
   </script>
 </head>
-<body>
+<body class="home">
 
-<header class="site-header" id="top">
-  <div class="wrap nav">
-    <a href="index.html" class="logo" aria-label="Taller Pacino — inicio">
+<div class="announce" aria-label="Anuncio">
+  <div class="announce-track">
+    <span>Bordado y estampado con tu logo</span><span>Presupuesto según cantidad</span><span>Línea laboral y deportiva</span><span>Confección propia</span>
+    <span>Bordado y estampado con tu logo</span><span>Presupuesto según cantidad</span><span>Línea laboral y deportiva</span><span>Confección propia</span>
+  </div>
+</div>
+
+<header class="topbar" id="top">
+  <nav class="pill-nav" aria-label="Principal">
+    <div class="pill-links">
+      <a href="#laboral">Laboral</a>
+      <a href="#deportiva">Deportiva</a>
+      <a href="#trabajos">Trabajos</a>
+      <a href="#nosotros">Nosotros</a>
+    </div>
+    <a href="index.html" class="pill-logo" aria-label="Taller Pacino — inicio">
       <img class="tp" src="assets/img/logo-tp.png" alt="">
       <img class="word" src="assets/img/logo-word-dark.png" alt="Taller Pacino">
-      <span class="sep"></span><span class="line">SPORT</span>
     </a>
-    <nav class="nav-links" aria-label="Principal">
-      <a href="#deportes">Deportes</a>
-      <a href="#nosotros">Nosotros</a>
-      <a href="#personalizador">Personalizador</a>
-      <a href="#catalogo">Catálogo</a>
-      <a href="#proceso">Proceso</a>
-    </nav>
-    <a class="btn btn-dark btn-sm" href="personalizar.html">Pedí tu presupuesto</a>
-  </div>
+    <a class="pill-cta" href="#contacto">Pedir presupuesto</a>
+  </nav>
 </header>
 
 <main>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <span class="eyebrow">Nueva línea deportiva</span>
-      <h1>Vestí a <em>tu club.</em></h1>
-      <p class="lead">Diseñamos y confeccionamos indumentaria para clubes de fútbol, hockey, rugby y básquet. Armá tu camiseta en 3D, probá colores y escudos, y pedí tu presupuesto a medida.</p>
-      <div class="actions">
-        <a class="btn btn-dark" href="personalizar.html">Diseñá tu camiseta <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
-        <a class="btn btn-outline" href="#deportes">Ver deportes</a>
+  <!-- HERO: dos líneas -->
+  <section class="hero2" aria-roledescription="carrusel" aria-label="Líneas de indumentaria">
+    <div class="hero-slide active" data-slide="0">
+      <div class="giant" aria-hidden="true">PACINO</div>
+      <div class="hero-media hero-media-photo"><img src="assets/img/trabajo-carniceria.jpg" alt="Chomba negra bordada y pantalón cargo blanco para carnicería"></div>
+      <div class="hero-copy">
+        <span class="mono">Línea laboral</span>
+        <h1>Uniformes con<br>tu marca.</h1>
+        <p>Chombas, camisas, pantalones cargo y remeras para carnicerías, comercios, talleres y empresas.</p>
+        <div class="actions"><a class="btn btn-dark" href="#laboral">Ver línea laboral →</a><a class="btn btn-outline" href="#contacto">Pedir presupuesto</a></div>
       </div>
-      <hr class="rule">
-      <div class="sports-row" aria-label="Deportes"><span>FÚTBOL</span><i></i><span>HOCKEY</span><i></i><span>RUGBY</span><i></i><span>BÁSQUET</span></div>
     </div>
-    <div class="hero-stage">
-      <div class="bg-num" id="heroNum" aria-hidden="true">10</div>
-      <div class="stage-top"><span>Taller Pacino · Sport</span><span>Arrastrá para girar 360°</span></div>
-      <div class="hero-canvas" id="heroStage" aria-label="Camiseta en 3D. Arrastrá para girarla."></div>
-      <div class="sport-tabs" id="sportTabs" role="tablist" aria-label="Elegí un deporte"></div>
+    <div class="hero-slide" data-slide="1">
+      <div class="giant" aria-hidden="true">SPORT</div>
+      <div class="hero-media hero-media-3d" id="heroStage" aria-label="Camiseta en 3D. Arrastrá para girarla."></div>
+      <div class="hero-copy">
+        <span class="mono">Línea deportiva</span>
+        <h1>Vestí a<br>tu club.</h1>
+        <p>Camisetas para fútbol, hockey, rugby y básquet. Diseñala en 3D con los colores y el escudo de tu club.</p>
+        <div class="actions"><a class="btn btn-dark" href="personalizar.html">Diseñar en 3D →</a><a class="btn btn-outline" href="#deportiva">Ver línea deportiva</a></div>
+      </div>
+    </div>
+    <div class="hero-nav">
+      <div class="hero-dots" id="heroDots"><button class="active" aria-label="Línea laboral">Laboral</button><button aria-label="Línea deportiva">Deportiva</button></div>
+      <div class="hero-arrows"><button id="heroPrev" aria-label="Anterior">←</button><button id="heroNext" aria-label="Siguiente">→</button></div>
     </div>
   </section>
 
-  <div class="band" aria-hidden="true">
-    <div class="band-track">
-      <span>Fútbol</span><span>Hockey</span><span>Rugby</span><span>Básquet</span><span>Sublimación total</span><span>Bordado</span><span>Confección propia</span>
-      <span>Fútbol</span><span>Hockey</span><span>Rugby</span><span>Básquet</span><span>Sublimación total</span><span>Bordado</span><span>Confección propia</span>
-    </div>
-  </div>
-
-  <!-- DEPORTES -->
-  <section class="section alt" id="deportes">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="index">01.</span><h2 class="title">Un equipo para <em>cada deporte.</em></h2></div>
-        <p class="lead">Prendas pensadas para el uso intensivo de cada disciplina: telas técnicas, cortes cómodos y terminaciones que resisten temporada tras temporada.</p>
+  <!-- RUBROS -->
+  <section class="sec" id="rubros">
+    <div class="sec-grid">
+      <span class="mono label">(01) Rubros</span>
+      <div class="sec-intro">
+        <h2>Indumentaria para cada rubro</h2>
+        <p>Trabajamos con negocios y equipos que necesitan verse prolijos todos los días. Elegí el tuyo y te asesoramos.</p>
       </div>
-      <div class="sports" id="sportsGrid"></div>
+    </div>
+    <div class="rubros">
+      <a class="rubro" href="#contacto" data-rubro="Carnicería / Alimentos"><img src="assets/img/trabajo-carniceria.jpg" alt="" loading="lazy"><div><h3>Carnicerías y alimentos</h3><span class="mono">Chomba · Pantalón · Gorra</span></div></a>
+      <a class="rubro" href="#contacto" data-rubro="Taller / Industria"><img src="assets/img/prod-camisa-trabajo.jpg" alt="" loading="lazy"><div><h3>Talleres e industria</h3><span class="mono">Camisa · Cargo · Grafa</span></div></a>
+      <a class="rubro" href="#contacto" data-rubro="Comercio / Empresa"><img src="assets/img/prod-camisa.jpg" alt="" loading="lazy"><div><h3>Comercios y empresas</h3><span class="mono">Camisa · Chomba · Remera</span></div></a>
+      <a class="rubro" href="#contacto" data-rubro="Servicios"><img src="assets/img/prod-conjunto.jpg" alt="" loading="lazy"><div><h3>Servicios y lavaderos</h3><span class="mono">Remera · Bermuda</span></div></a>
+      <a class="rubro rubro-sport" href="#deportiva" data-rubro="Club deportivo"><div class="rubro-3d" id="rubroSport"></div><div><h3>Clubes deportivos</h3><span class="mono">Camiseta · Short · Buzo</span></div></a>
+    </div>
+  </section>
+
+  <!-- LÍNEA LABORAL -->
+  <section class="sec sec-alt" id="laboral">
+    <div class="sec-grid">
+      <span class="mono label">(02) Línea laboral</span>
+      <div class="sec-intro">
+        <h2>Prendas de trabajo con tu logo</h2>
+        <p>Telas resistentes, confección propia y tu marca bordada o estampada. Desde una unidad para probar hasta el equipo completo.</p>
+      </div>
+    </div>
+    <div class="prod-grid" id="laboralGrid"></div>
+  </section>
+
+  <!-- CLIENTES -->
+  <section class="clients" aria-label="Clientes">
+    <span class="mono">Confían en nosotros</span>
+    <div class="clients-track">
+      <span>Carnicería Los Amigos</span><i></i><span>Blue Court</span><i></i><span>Master Wash</span><i></i>
+      <span>Carnicería Los Amigos</span><i></i><span>Blue Court</span><i></i><span>Master Wash</span><i></i>
+      <span>Carnicería Los Amigos</span><i></i><span>Blue Court</span><i></i><span>Master Wash</span><i></i>
+    </div>
+  </section>
+
+  <!-- LÍNEA DEPORTIVA -->
+  <section class="sec sec-dark" id="deportiva">
+    <div class="sec-grid">
+      <span class="mono label">(03) Línea deportiva</span>
+      <div class="sec-intro">
+        <h2>Diseñá la camiseta de tu club en 3D</h2>
+        <p>Elegí deporte, diseño y colores. En el personalizador subís el escudo, cargás nombres, números y talles, y nos llega todo listo para cotizar.</p>
+      </div>
+    </div>
+    <div class="sport-split">
+      <div class="sport-stage">
+        <div class="bg-num" id="sportNum" aria-hidden="true">10</div>
+        <div class="sport-canvas" id="sportStage" aria-label="Camiseta en 3D. Arrastrá para girarla."></div>
+        <span class="mono drag">Arrastrá para girar · 360°</span>
+      </div>
+      <div class="sport-side">
+        <div class="sport-list" id="sportList" role="tablist" aria-label="Deportes"></div>
+        <div class="demo-block">
+          <span class="mono">Diseño</span>
+          <div class="chips" id="patternChips"></div>
+        </div>
+        <div class="demo-block">
+          <span class="mono">Colores del club</span>
+          <div class="pal-list" id="paletteList"></div>
+        </div>
+        <a class="btn btn-light btn-block" id="sportGo" href="personalizar.html">Seguir en el personalizador →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRABAJOS -->
+  <section class="sec" id="trabajos">
+    <div class="sec-grid">
+      <span class="mono label">(04) Trabajos</span>
+      <div class="sec-intro">
+        <h2>Así quedan nuestras prendas</h2>
+        <p>Algunas propuestas que hicimos para clientes de distintos rubros.</p>
+      </div>
+    </div>
+    <div class="works">
+      <figure class="w-tall"><img src="assets/img/trabajo-carniceria.jpg" alt="Uniforme para Carnicería Los Amigos" loading="lazy"><figcaption><span class="mono">Carnicería</span>Chomba bordada + pantalón cargo</figcaption></figure>
+      <figure><img src="assets/img/trabajo-conjunto.jpg" alt="Camisa y pantalón de trabajo Blue Court" loading="lazy"><figcaption><span class="mono">Industria</span>Camisa de trabajo + pantalón cargo</figcaption></figure>
+      <figure><img src="assets/img/trabajo-camisa.jpg" alt="Camisa celeste con logo Blue Court" loading="lazy"><figcaption><span class="mono">Empresa</span>Camisa manga corta con logo bordado</figcaption></figure>
+      <figure><img src="assets/img/trabajo-remera.jpg" alt="Remera azul con logo Blue Court frente y espalda" loading="lazy"><figcaption><span class="mono">Empresa</span>Remera con logo frente y espalda</figcaption></figure>
+      <figure><img src="assets/img/trabajo-lavadero.jpg" alt="Remera y bermuda Master Wash" loading="lazy"><figcaption><span class="mono">Lavadero</span>Remera + bermuda cargo</figcaption></figure>
     </div>
   </section>
 
   <!-- NOSOTROS -->
-  <section class="about" id="nosotros">
-    <div class="about-text reveal">
-      <div><span class="index">02.</span><h2 class="title">Quiénes <em>somos.</em></h2></div>
-      <p class="big">Somos una empresa familiar textil con experiencia en indumentaria laboral, y ahora llevamos ese oficio al deporte.</p>
-      <p class="lead">Combinamos experiencia, compromiso y atención al detalle para crear prendas funcionales, cómodas y adaptadas a las necesidades de cada club.</p>
-      <hr class="rule">
-      <div class="values">
-        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg></div><span>Empresa<br>familiar</span></div>
-        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg></div><span>Experiencia<br>textil</span></div>
-        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span>Compromiso<br>en cada prenda</span></div>
-        <div class="value"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5"/></svg></div><span>Atención<br>al detalle</span></div>
+  <section class="about2" id="nosotros">
+    <div class="about2-photo" style="background-image:url('assets/img/taller.jpg')" role="img" aria-label="Prendas en el taller con la etiqueta Taller Pacino"></div>
+    <div class="about2-text">
+      <span class="mono">(05) Nosotros</span>
+      <h2>Empresa familiar textil.<br><em>Cada prenda, hecha por nosotros.</em></h2>
+      <p>Somos un taller familiar dedicado al desarrollo de indumentaria laboral. Combinamos experiencia, compromiso y atención al detalle para crear prendas funcionales, cómodas y adaptadas a cada actividad. Hoy sumamos la línea deportiva con el mismo oficio.</p>
+      <div class="values2">
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></svg><span>Empresa familiar</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l9 5-9 5-9-5 9-5zM3 12l9 5 9-5M3 17l9 5 9-5"/></svg><span>Materiales resistentes</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Compromiso en cada prenda</span></div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="1.5"/></svg><span>Atención al detalle</span></div>
       </div>
-    </div>
-    <div class="about-photo" style="background-image:url('assets/img/taller.jpg')" role="img" aria-label="Prendas confeccionadas en el taller con la etiqueta Taller Pacino"></div>
-  </section>
-
-  <!-- PERSONALIZADOR -->
-  <section class="section dark" id="personalizador">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="index">03.</span><h2 class="title">Personalizador <em>3D.</em></h2></div>
-        <p class="lead">Probalo acá mismo: elegí la prenda, el diseño y los colores. En el personalizador completo subís el escudo, cargás nombres, números y talles, y nos llega todo listo para cotizar.</p>
-      </div>
-      <div class="demo reveal">
-        <div class="demo-opts">
-          <div class="demo-steps"><span class="on">Prenda</span><span class="on">Diseño</span><span class="on cur">Color</span><span>Texto</span><span>Escudo</span></div>
-          <h4>Armá tu camiseta</h4>
-          <div><div class="demo-label">Prenda</div><div class="chips" id="demoProducts"></div></div>
-          <div><div class="demo-label">Diseño</div><div class="chips" id="demoPatterns"></div></div>
-          <div><div class="demo-label">Colores del club</div><div class="pal-list" id="demoPalettes"></div></div>
-        </div>
-        <div class="demo-view">
-          <div class="demo-canvas" id="demoStage" aria-label="Vista 3D del diseño"></div>
-          <div class="demo-views" id="demoViews">
-            <button data-view="frente" class="active">Frente</button><button data-view="espalda">Espalda</button><button data-view="izq">Lateral</button><button data-view="rotar">360°</button>
-          </div>
-        </div>
-        <div class="demo-sum">
-          <h4>Resumen</h4>
-          <dl id="demoSpec"></dl>
-          <p class="demo-note">La vista 3D es una referencia. Antes de producir te enviamos la propuesta final para aprobar.</p>
-          <a class="btn btn-oliva btn-block" id="demoGo" href="personalizar.html">Seguir personalizando →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CATÁLOGO -->
-  <section class="section" id="catalogo">
-    <div class="wrap">
-      <div class="sec-head reveal">
-        <div><span class="index">04.</span><h2 class="title">Prendas <em>para tu equipo.</em></h2></div>
-        <p class="lead">Todas se personalizan en colores, diseño, escudo, nombre y número, en talles de adulto y niño. Pasá el mouse para ver la espalda.</p>
-      </div>
-      <div class="products" id="productGrid"></div>
     </div>
   </section>
 
   <!-- PROCESO -->
-  <section class="section alt" id="proceso">
-    <div class="wrap">
-      <div class="sec-head reveal" style="display:block">
-        <span class="index">05.</span><h2 class="title">Nuestro <em>proceso.</em></h2>
-        <p class="sub-tracked">De la idea a tu equipo.</p>
+  <section class="sec sec-alt" id="proceso">
+    <div class="sec-grid">
+      <span class="mono label">(06) Proceso</span>
+      <div class="sec-intro">
+        <h2>De la idea a tu equipo</h2>
+        <p>Así trabajamos cada pedido, sea un uniforme para tu local o la camiseta de tu club.</p>
       </div>
-      <div class="steps reveal">
-        <div class="step"><div class="step-top"><b>01</b><i></i></div><h3>Diseñás o charlamos</h3><p>Armás tu idea en el personalizador o nos contás qué necesita tu club.</p><img src="assets/img/proceso-1.jpg" alt="Reunión con el cliente y bocetos" loading="lazy"></div>
-        <div class="step"><div class="step-top"><b>02</b><i></i></div><h3>Mostramos muestras</h3><p>Presentamos modelos, telas, colores y terminaciones.</p><img src="assets/img/proceso-2.jpg" alt="Muestras de telas" loading="lazy"></div>
-        <div class="step"><div class="step-top"><b>03</b><i></i></div><h3>Acordamos el pedido</h3><p>Definimos cantidades, talles, nombres, números y detalles técnicos.</p><img src="assets/img/proceso-3.jpg" alt="Ficha técnica del pedido" loading="lazy"></div>
-        <div class="step"><div class="step-top"><b>04</b><i></i></div><h3>Producimos</h3><p>Confeccionamos en nuestro taller, con procesos propios y control en cada etapa.</p><img src="assets/img/proceso-4.jpg" alt="Confección en el taller" loading="lazy"></div>
-        <div class="step"><div class="step-top"><b>05</b><i></i></div><h3>Controlamos la calidad</h3><p>Revisamos cada prenda: resistencia, terminación y funcionalidad.</p><img src="assets/img/proceso-5.jpg" alt="Control de calidad" loading="lazy"></div>
-        <div class="step"><div class="step-top"><b>06</b><i></i></div><h3>Entregamos</h3><p>Coordinamos la entrega para que tu equipo salga a la cancha.</p><img src="assets/img/proceso-6.jpg" alt="Cajas de entrega Taller Pacino" loading="lazy"></div>
+    </div>
+    <ol class="steps2">
+      <li><img src="assets/img/proceso-1.jpg" alt="" loading="lazy"><span class="mono">01</span><h3>Charlamos</h3><p>Conocemos tu rubro y te asesoramos sobre las mejores opciones.</p></li>
+      <li><img src="assets/img/proceso-2.jpg" alt="" loading="lazy"><span class="mono">02</span><h3>Mostramos muestras</h3><p>Modelos, telas, colores y terminaciones para elegir juntos.</p></li>
+      <li><img src="assets/img/proceso-3.jpg" alt="" loading="lazy"><span class="mono">03</span><h3>Acordamos el pedido</h3><p>Cantidades, talles, bordados o estampados y detalles técnicos.</p></li>
+      <li><img src="assets/img/proceso-4.jpg" alt="" loading="lazy"><span class="mono">04</span><h3>Producimos</h3><p>Confeccionamos en nuestro taller con control en cada etapa.</p></li>
+      <li><img src="assets/img/proceso-5.jpg" alt="" loading="lazy"><span class="mono">05</span><h3>Controlamos</h3><p>Revisamos resistencia, terminación y funcionalidad de cada prenda.</p></li>
+      <li><img src="assets/img/proceso-6.jpg" alt="" loading="lazy"><span class="mono">06</span><h3>Entregamos</h3><p>Coordinamos la entrega en tiempo y forma.</p></li>
+    </ol>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="sec" id="contacto">
+    <div class="contact">
+      <div class="contact-text">
+        <span class="mono">(07) Presupuesto</span>
+        <h2>Contanos qué necesitás</h2>
+        <p>Completá los datos y armamos el mensaje para que nos lo mandes por WhatsApp. Te respondemos con una propuesta y el presupuesto según cantidad.</p>
+        <ul class="contact-list">
+          <li><span class="mono">WhatsApp</span><a data-cfg="whatsapp-link" target="_blank" rel="noopener" id="waText"></a></li>
+          <li><span class="mono">Email</span><a data-cfg="email-link"></a></li>
+          <li><span class="mono">Instagram</span><a data-cfg="instagram-link" target="_blank" rel="noopener"></a></li>
+        </ul>
       </div>
+      <form class="quote" id="quickQuote" novalidate>
+        <div class="field"><label for="qRubro">Rubro</label>
+          <select class="select" id="qRubro" name="rubro">
+            <option>Carnicería / Alimentos</option><option>Gastronomía</option><option>Taller / Industria</option><option>Comercio / Empresa</option><option>Servicios</option><option>Club deportivo</option><option>Otro</option>
+          </select></div>
+        <div class="field"><label>Prendas que te interesan</label>
+          <div class="checks" id="qPrendas">
+            <label><input type="checkbox" value="Chomba"><span>Chomba</span></label>
+            <label><input type="checkbox" value="Camisa"><span>Camisa</span></label>
+            <label><input type="checkbox" value="Pantalón cargo"><span>Pantalón cargo</span></label>
+            <label><input type="checkbox" value="Remera"><span>Remera</span></label>
+            <label><input type="checkbox" value="Bermuda"><span>Bermuda</span></label>
+            <label><input type="checkbox" value="Gorra"><span>Gorra</span></label>
+            <label><input type="checkbox" value="Camiseta deportiva"><span>Camiseta deportiva</span></label>
+          </div></div>
+        <div class="row2">
+          <div class="field"><label for="qCant">Cantidad aproximada</label><input class="input" id="qCant" name="cantidad" inputmode="numeric" placeholder="Ej.: 12"></div>
+          <div class="field"><label for="qLogo">Personalización</label>
+            <select class="select" id="qLogo" name="logo"><option>Bordado</option><option>Estampado</option><option>No sé, asesórenme</option></select></div>
+        </div>
+        <div class="row2">
+          <div class="field"><label for="qName">Tu nombre *</label><input class="input" id="qName" name="nombre" autocomplete="name"></div>
+          <div class="field"><label for="qNeg">Negocio o club *</label><input class="input" id="qNeg" name="negocio"></div>
+        </div>
+        <div class="field"><label for="qMsg">Comentarios</label><textarea class="textarea" id="qMsg" name="comentarios" placeholder="Colores, talles, fecha en que lo necesitás…"></textarea></div>
+        <p class="note" id="qErr" hidden></p>
+        <button class="btn btn-wa btn-block" type="submit">Enviar por WhatsApp →</button>
+        <div class="quote-out" id="qOut" hidden>
+          <p class="note">Si WhatsApp no se abrió, copiá el mensaje y envialo al número de arriba:</p>
+          <textarea class="textarea" id="qText" readonly></textarea>
+          <button class="btn btn-outline btn-sm" type="button" id="qCopy">Copiar mensaje</button>
+        </div>
+      </form>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section" id="faq">
-    <div class="wrap faq-grid">
-      <div class="reveal"><span class="index">06.</span><h2 class="title">Preguntas <em>frecuentes.</em></h2></div>
-      <div class="faq reveal">
-        <details><summary>¿Por qué no hay precios en la web?</summary><p>Cada club pide algo distinto: el valor depende de la prenda, la tela, la técnica (sublimación, bordado o estampa), la cantidad y los plazos. Por eso armamos un presupuesto a medida con la información que nos mandás desde el personalizador.</p></details>
-        <details><summary>¿El diseño que armo en la web es el final?</summary><p>Es una referencia para que veas la idea y nos la transmitas. Antes de producir preparamos el diseño final y lo aprobás con nosotros.</p></details>
-        <details><summary>¿Puedo subir el escudo de mi club?</summary><p>Sí. Podés subirlo en PNG, JPG o SVG para verlo aplicado. Si tenés el archivo vectorial, envialo con la solicitud para lograr la mejor calidad.</p></details>
-        <details><summary>¿Hacen nombre y número por jugador?</summary><p>Sí. Cargá las cantidades por talle y, si cada prenda lleva un nombre y número distinto, contanos en la solicitud y te pedimos la lista completa del plantel.</p></details>
-        <details><summary>¿Trabajan categorías infantiles?</summary><p>Sí, hacemos talles de niño y de adulto para que todas las categorías del club tengan la misma indumentaria.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta">
-    <div class="wrap">
-      <div class="reveal">
-        <h2>¿Armamos la indumentaria<br>de tu club?</h2>
-        <p>Diseñá online o escribinos: te respondemos con una propuesta y el presupuesto a medida.</p>
-      </div>
-      <div class="cta-actions">
-        <a class="btn btn-light" href="personalizar.html">Abrir el personalizador</a>
-        <a class="btn btn-outline-light" data-cfg="whatsapp-link" target="_blank" rel="noopener">Escribinos por WhatsApp</a>
+  <section class="sec sec-alt" id="faq">
+    <div class="sec-grid">
+      <span class="mono label">(08) Preguntas</span>
+      <div class="faq">
+        <details><summary>¿Por qué no hay precios en la web?</summary><p>El valor depende de la prenda, la tela, el tipo de personalización (bordado o estampado) y la cantidad. Por eso armamos un presupuesto a medida para cada pedido.</p></details>
+        <details><summary>¿Puedo pedir pocas unidades?</summary><p>Sí. Contanos cuántas prendas necesitás y te pasamos el presupuesto según la cantidad.</p></details>
+        <details><summary>¿Cómo les paso mi logo?</summary><p>Mandanos el logo por WhatsApp o email, idealmente en buena calidad o en archivo vectorial. Nosotros lo preparamos para bordar o estampar.</p></details>
+        <details><summary>¿Hacen camisetas para clubes?</summary><p>Sí. En la línea deportiva hacemos camisetas, shorts y buzos para fútbol, hockey, rugby y básquet, con nombre y número por jugador. Podés diseñarla en el personalizador 3D.</p></details>
+        <details><summary>¿Ven las muestras antes de producir?</summary><p>Sí. Antes de producir te mostramos modelos, telas y terminaciones, y aprobás el diseño final.</p></details>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-grid">
-      <div>
-        <img class="foot-logo" src="assets/img/logo-word-light.png" alt="Taller Pacino">
-        <p style="margin:0;line-height:1.7">Indumentaria laboral y deportiva.<br>Empresa familiar textil.</p>
-      </div>
-      <div><h4>DEPORTES</h4><ul><li><a href="personalizar.html?sector=futbol">Fútbol</a></li><li><a href="personalizar.html?sector=hockey">Hockey</a></li><li><a href="personalizar.html?sector=rugby">Rugby</a></li><li><a href="personalizar.html?sector=basquet">Básquet</a></li></ul></div>
-      <div><h4>SITIO</h4><ul><li><a href="personalizar.html">Personalizador 3D</a></li><li><a href="#catalogo">Catálogo</a></li><li><a href="#proceso">Nuestro proceso</a></li><li><a href="#faq">Preguntas</a></li></ul></div>
-      <div><h4>CONTACTO</h4><ul><li><a data-cfg="whatsapp-link" target="_blank" rel="noopener">WhatsApp</a></li><li><a data-cfg="email-link"></a></li><li><a data-cfg="instagram-link" target="_blank" rel="noopener"></a></li><li data-cfg="ciudad"></li></ul></div>
-    </div>
-    <div class="foot-bottom"><span>© <span data-cfg="year"></span> Taller Pacino</span><a href="#top">Volver arriba ↑</a></div>
+<footer class="foot2">
+  <div class="foot2-big" aria-hidden="true">PACINO</div>
+  <div class="foot2-grid">
+    <div><img class="foot-logo" src="assets/img/logo-word-light.png" alt="Taller Pacino"><p>Indumentaria laboral y deportiva.<br>Empresa familiar textil.</p></div>
+    <div><h4 class="mono">Líneas</h4><ul><li><a href="#laboral">Laboral</a></li><li><a href="#deportiva">Deportiva</a></li><li><a href="personalizar.html">Personalizador 3D</a></li></ul></div>
+    <div><h4 class="mono">Taller</h4><ul><li><a href="#trabajos">Trabajos</a></li><li><a href="#nosotros">Nosotros</a></li><li><a href="#proceso">Proceso</a></li><li><a href="#faq">Preguntas</a></li></ul></div>
+    <div><h4 class="mono">Contacto</h4><ul><li><a data-cfg="whatsapp-link" target="_blank" rel="noopener">WhatsApp</a></li><li><a data-cfg="email-link"></a></li><li><a data-cfg="instagram-link" target="_blank" rel="noopener"></a></li><li data-cfg="ciudad"></li></ul></div>
   </div>
+  <div class="foot2-bottom"><span>© <span data-cfg="year"></span> Taller Pacino</span><a href="#top">Volver arriba ↑</a></div>
 </footer>
 
 <a class="wa-float" data-cfg="whatsapp-link" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
